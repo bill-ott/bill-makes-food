@@ -14,15 +14,65 @@ import { Font } from "astro:assets";
 		<Font cssVariable="--font-montserrat" />
 	</head>
 	<body>
+		<header class="site-header">
+			<div class="home-link-container">
+				<!-- logo will go here -->
+				<a class="home-link" href="/">Bill Makes Food</a>
+			</div>
+			<nav class="site-nav">
+				<ul class="nav-list">
+					<li class="nav-list-item">
+						<a class="nav-link" href="/blog">Blog</a>
+					</li>
+					<li class="nav-list-item">
+						<a class="nav-link" href="/recipes">Recipes</a>
+					</li>
+					<li class="nav-list-item">
+						<a class="nav-link" href="/about">About</a>
+					</li>
+					<li class="nav-list-item">
+						<a class="nav-link" href="/contact">Contact</a>
+					</li>
+				</ul>
+			</nav>
+		</header>
 		<slot />
 	</body>
 </html>
 
 <style>
-	html,
+	:root {
+		--default-font: var(--font-montserrat), sans-serif;
+		--color-sage: #6d7a66;
+		--color-honeydew: #f0fff0;
+		--color-primary-text: var(--color-sage);
+		--color-background: var(--color-honeydew);
+		font-family: var(--default-font);
+		background-color: var(--color-background);
+	}
 	body {
 		margin: 0;
 		width: 100%;
 		height: 100%;
+	}
+	.site-header {
+		display: flex;
+		justify-content: space-between;
+		padding: 2rem;
+		align-items: center;
+	}
+	.home-link, .nav-link {
+		color: var(--color-primary-text);
+		text-decoration: none;
+	}
+	.home-link:hover, .nav-link:hover {
+		color: color-mix(in srgb, var(--color-primary-text) 65%, transparent);
+	}
+	.nav-list {
+		margin: 0;
+		padding: 0;
+		list-style-type: none;
+		display: flex;
+		gap: 3rem;
 	}
 </style>
