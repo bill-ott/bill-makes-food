@@ -1,10 +1,30 @@
 ---
 import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 
 <Layout>
-	<h1>Bill Makes Food</h1>
+	<section class="header-section">
+		<h1 class="site-title">Bill Makes Food</h1>
+		<p class="tagline">Joy in habitual home cooking</p>
+		<p class="intro">
+			I've gradually developed a lifestyle I call "cooking by default". 
+			This is where I share what I've learned. 
+			Maybe you'll find it helpful, even if you don't (yet) love to cook.
+		</p>
+	</section>
 </Layout>
+
+<style>
+	.header-section {
+		text-align: center;
+		padding: 4rem 2rem;
+		max-width: 700px;
+		margin: 0 auto;
+		font-family: var(--font-montserrat), sans-serif;
+		color: #6d7a66;
+	}
+	.site-title {
+		font-size: 3rem;
+		font-weight: 500;
+	}
+</style>
