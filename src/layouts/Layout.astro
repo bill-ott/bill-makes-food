@@ -1,5 +1,6 @@
 ---
 import { Font } from "astro:assets";
+const pathname = Astro.url.pathname;
 ---
 
 <!doctype html>
@@ -17,21 +18,46 @@ import { Font } from "astro:assets";
 		<header class="site-header">
 			<div class="home-link-container">
 				<!-- logo will go here -->
-				<a class="home-link" href="/">Bill Makes Food</a>
+				<a
+					class="home-link"
+					href="/"
+					aria-current={pathname === "/" ? "page" : undefined}>
+					Bill Makes Food
+				</a>
 			</div>
 			<nav class="site-nav">
 				<ul class="nav-list">
 					<li class="nav-list-item">
-						<a class="nav-link" href="/blog">Blog</a>
+						<a
+							class="nav-link"
+							href="/blog"
+							aria-current={pathname === "/blog" ? "page" : undefined}>
+							Blog
+						</a>
 					</li>
 					<li class="nav-list-item">
-						<a class="nav-link" href="/recipes">Recipes</a>
+						<a
+							class="nav-link"
+							href="/recipes"
+							aria-current={pathname === "/recipes" ? "page" : undefined}>
+							Recipes
+						</a>
 					</li>
 					<li class="nav-list-item">
-						<a class="nav-link" href="/about">About</a>
+						<a
+							class="nav-link"
+							href="/about"
+							aria-current={pathname === "/about" ? "page" : undefined}>
+							About
+						</a>
 					</li>
 					<li class="nav-list-item">
-						<a class="nav-link" href="/contact">Contact</a>
+						<a
+							class="nav-link"
+							href="/contact"
+							aria-current={pathname === "/contact" ? "page" : undefined}>
+							Contact
+						</a>
 					</li>
 				</ul>
 			</nav>
