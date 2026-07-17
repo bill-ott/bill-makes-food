@@ -80,6 +80,16 @@ const navLinks = [
 		--font-size-small: 0.8rem;
 		--font-size-x-small: 0.64rem;
 
+		/* spacing */
+		--space-xs:  0.5rem;
+		--space-sm:  1rem;
+		--space-md:  2rem;
+		--space-lg:  3rem;
+		--space-xl:  5rem;
+
+		/* borders */
+		--section-border: .1rem solid var(--color-border);
+
 		/* ---- Raw palette (Japanese traditional colors) ---- */
 		--color-off-white: #FDFBF6;  /* warm white */
 		--color-more-off-white: #f2ede3;  /* warmer white */
@@ -118,34 +128,41 @@ const navLinks = [
 		display: flex;
 		flex-direction: column;
 		min-height: 100vh;
+		padding: var(--space-md);
 	}
 	.site-header {
 		display: flex;
 		justify-content: space-between;
-		padding: 2rem;
 		align-items: center;
 	}
-	.home-link, .nav-link {
+	.home-link {
 		color: var(--color-text-secondary);
 		text-decoration: none;
 	}
-	.home-link:hover, .nav-link:hover {
+	.home-link:hover {
 		color: color-mix(in srgb, var(--color-text-secondary) 65%, transparent);
+	}
+	.nav-link {
+		color: var(--color-link);
+		text-decoration: none;
+	}
+	.nav-link:hover {
+		color: color-mix(in srgb, var(--color-link) 65%, transparent);
 	}
 	.nav-list {
 		margin: 0;
 		padding: 0;
 		list-style-type: none;
 		display: flex;
-		gap: 3rem;
+		gap: var(--space-lg);
 	}
 	.content-wrapper {
 		flex: 1;
 	}
 	.footer-wrapper {
-		padding: 2rem 1rem 5rem 3rem;
 		font-size: var(--font-size-small);
 		color: var(--color-text-secondary);
+		margin-top: var(--space-md);
 	}
 	.copyright {
 		margin: 0;

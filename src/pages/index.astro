@@ -12,30 +12,36 @@ import Layout from '../layouts/Layout.astro';
 			Maybe you'll find it helpful, even if you don't (yet) love to cook.
 		</p>
 	</section>
-	<section class="home-page-content">		
-		<div class="blog-grid">
-			<div class="blog-preview">
-				blog preview 1
+	<div class="home-page-content-wrapper">
+		<section class="blog-section">
+			<h2 class="content-header">Latest posts</h2>
+			<div class="blog-grid">
+				<div class="blog-preview">
+					blog preview 1
+				</div>
+				<div class="blog-preview">
+					blog preview 2
+				</div>
+				<div class="blog-preview">
+					blog preview 3
+				</div>
 			</div>
-			<div class="blog-preview">
-				blog preview 2
+		</section>
+		<section class="recipe-section">
+			<h2 class="content-header">Latest recipes</h2>
+			<div class="recipe-grid">
+				<div class="recipe-preview">
+					recipe preview 1
+				</div>
+				<div class="recipe-preview">
+					recipe preview 2
+				</div>
+				<div class="recipe-preview">
+					recipe preview 3
+				</div>
 			</div>
-			<div class="blog-preview">
-				blog preview 3
-			</div>
-		</div>
-		<div class="recipe-grid">
-			<div class="recipe-preview">
-				recipe preview 1
-			</div>
-			<div class="recipe-preview">
-				recipe preview 2
-			</div>
-			<div class="recipe-preview">
-				recipe preview 3
-			</div>
-		</div>
-	</section>
+		</section>
+	</div>
 </Layout>
 
 <style>
@@ -45,6 +51,7 @@ import Layout from '../layouts/Layout.astro';
 		flex-direction: column;
 		align-items: center;
 		text-align: center;
+		margin-top: var(--space-md);
 	}
 	.site-title {
 		font-size: var(--font-size-h2);
@@ -55,25 +62,32 @@ import Layout from '../layouts/Layout.astro';
 	.tagline {
 		color: var(--color-text-tertiary);
 		font-size: var(--font-size-h5);
-		margin: 1rem 0 0;
+		margin: 0; /* resets default */
+		margin-top: var(--space-sm);
 	}
 	.intro {
-		margin-top: 3rem;
+		margin-top: var(--space-lg);
 		max-width: 70ch;
 	}
-	.home-page-content {
-		margin-top: 6rem;
+	.home-page-content-wrapper {
+		margin-top: var(--space-xl);
+	}
+	.content-header {
+		border-top: var(--section-border);
+		font-size: var(--font-size-h6);
+		padding-top: var(--space-sm);
+	}
+	.recipe-section {
+		margin-top: var(--space-md);
 	}
 	.blog-grid, .recipe-grid {
-		padding: 2rem;
-		border-top: .1rem solid var(--color-border);
 		display: grid;
 		grid-template-columns: repeat(3, 1fr);
-		gap: 1rem;
+		gap: var(--space-sm);
 	}
 	.blog-preview, .recipe-preview {
 		min-height: 20rem;
-		border: .1rem solid var(--color-border-stronger);
+		border: .1rem solid var(--color-border-stronger); /* placeholder for content */
 		text-align: center;
 	}
 </style>
