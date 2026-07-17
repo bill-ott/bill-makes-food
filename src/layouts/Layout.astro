@@ -65,10 +65,34 @@ const navLinks = [
 <style>
 	:root {
 		--default-font: var(--font-montserrat), sans-serif;
-		--color-sage: #6d7a66;
-		--color-honeydew: #f0fff0;
-		--color-primary-text: var(--color-sage);
-		--color-background: var(--color-honeydew);
+
+		/* ---- Raw palette (Japanese traditional colors) ---- */
+		--color-off-white:      #FDFBF6;  /* warm white */
+		--color-forest-green:   #1F2E22;  /* derived from pistachio, near-black */
+		--color-pistachio:      #3D5D42;  /* 木賊色 とくさいろ */
+		--color-mouse-gray:     #97867C;  /* 銀鼠色 ぎんねずみいろ */
+		--color-vermillion:     #BC2D29;  /* 銀朱色 ぎんしゅいろ */
+		--color-sulphur-yellow: #D3B17D;  /* 蒸栗色 むしくりいろ */
+
+		/* ---- Usage: text ---- */
+		--color-text-primary: var(--color-forest-green);
+		--color-text-secondary: var(--color-pistachio);
+		--color-text-tertiary: var(--color-mouse-gray);
+
+		/* ---- Usage: interactive / accent ---- */
+		--color-link: var(--color-vermillion);
+		--color-accent-primary: var(--color-vermillion);
+		--color-accent-secondary: var(--color-pistachio);
+		--color-accent-fill: var(--color-sulphur-yellow);
+
+		/* ---- Usage: surfaces ---- */
+		--color-background: var(--color-off-white);
+		--color-surface: var(--color-off-white);
+
+		/* ---- Usage: borders ---- */
+		--color-border: var(--color-sulphur-yellow);
+		--color-border-strong: var(--color-mouse-gray);
+
 		font-family: var(--default-font);
 		background-color: var(--color-background);
 		color: var(--color-primary-text);
@@ -86,11 +110,11 @@ const navLinks = [
 		align-items: center;
 	}
 	.home-link, .nav-link {
-		color: var(--color-primary-text);
+		color: var(--color-text-secondary);
 		text-decoration: none;
 	}
 	.home-link:hover, .nav-link:hover {
-		color: color-mix(in srgb, var(--color-primary-text) 65%, transparent);
+		color: color-mix(in srgb, var(--color-text-secondary) 65%, transparent);
 	}
 	.nav-list {
 		margin: 0;
