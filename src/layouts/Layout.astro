@@ -1,6 +1,12 @@
 ---
 import { Font } from "astro:assets";
 const pathname = Astro.url.pathname;
+const navLinks = [
+	{href: '/blog', label: 'Blog'},
+	{href: '/recipes', label: 'Recipes'},
+	{href: '/about', label: 'About'},
+	{href: '/contact', label: 'Contact'},
+];
 ---
 
 <!doctype html>
@@ -27,38 +33,16 @@ const pathname = Astro.url.pathname;
 			</div>
 			<nav class="site-nav">
 				<ul class="nav-list">
-					<li class="nav-list-item">
-						<a
-							class="nav-link"
-							href="/blog"
-							aria-current={pathname === "/blog" ? "page" : undefined}>
-							Blog
-						</a>
-					</li>
-					<li class="nav-list-item">
-						<a
-							class="nav-link"
-							href="/recipes"
-							aria-current={pathname === "/recipes" ? "page" : undefined}>
-							Recipes
-						</a>
-					</li>
-					<li class="nav-list-item">
-						<a
-							class="nav-link"
-							href="/about"
-							aria-current={pathname === "/about" ? "page" : undefined}>
-							About
-						</a>
-					</li>
-					<li class="nav-list-item">
-						<a
-							class="nav-link"
-							href="/contact"
-							aria-current={pathname === "/contact" ? "page" : undefined}>
-							Contact
-						</a>
-					</li>
+					{navLinks.map((link) => (
+						<li class="nav-list-item">
+							<a
+								class="nav-link"
+								href={link.href}
+								aria-current={pathname === link.href ? "page" : undefined}>
+								{link.label}
+							</a>
+						</li>
+					))}
 				</ul>
 			</nav>
 		</header>
