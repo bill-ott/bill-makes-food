@@ -63,19 +63,22 @@ const navLinks = [
 </html>
 
 <style>
+	*, *::before, *::after {
+		box-sizing: border-box;
+	}
 	:root {
 		--default-font: var(--font-montserrat), sans-serif;
 		
-		/* font sizes (based on Major Third scale */
+		/* font sizes (based on Major Third scale) */
 		--font-size-h1: 3.815rem;
 		--font-size-h2: 3.052rem;
 		--font-size-h3: 2.441rem;
 		--font-size-h4: 1.952rem;
 		--font-size-h5: 1.562rem;
 		--font-size-h6: 1.25rem;
-		--font-p: 1rem;
-		--font-small: 0.8rem;
-		--font-x-small: 0.64rem;
+		--font-size-p: 1rem;
+		--font-size-small: 0.8rem;
+		--font-size-x-small: 0.64rem;
 
 		/* ---- Raw palette (Japanese traditional colors) ---- */
 		--color-off-white: #FDFBF6;  /* warm white */
@@ -106,10 +109,9 @@ const navLinks = [
 		--color-border-strong: var(--color-sulphur-yellow);
 		--color-border-stronger: var(--color-mouse-gray);
 
-		box-sizing: border-box;
 		font-family: var(--default-font);
 		background-color: var(--color-background);
-		color: var(--color-primary-text);
+		color: var(--color-text-primary);
 	}
 	body {
 		margin: 0;
@@ -142,7 +144,7 @@ const navLinks = [
 	}
 	.footer-wrapper {
 		padding: 2rem 1rem 5rem 3rem;
-		font-size: var(--font-small);
+		font-size: var(--font-size-small);
 		color: var(--color-text-secondary);
 	}
 	.copyright {
