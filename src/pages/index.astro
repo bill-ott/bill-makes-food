@@ -7,24 +7,87 @@ import Layout from '../layouts/Layout.astro';
 		<h1 class="site-title">Bill Makes Food</h1>
 		<p class="tagline">Joy in habitual home cooking</p>
 		<p class="intro">
-			I've gradually developed a lifestyle I call "cooking by default". 
-			This is where I share what I've learned. 
+			I've gradually developed a lifestyle I call "cooking by default".
+			This is where I share what I've learned.
 			Maybe you'll find it helpful, even if you don't (yet) love to cook.
 		</p>
 	</section>
+	<div class="home-page-content-wrapper">
+		<section class="blog-section">
+			<h2 class="content-header">Latest posts</h2>
+			<div class="blog-grid">
+				<div class="blog-preview">
+					blog preview 1
+				</div>
+				<div class="blog-preview">
+					blog preview 2
+				</div>
+				<div class="blog-preview">
+					blog preview 3
+				</div>
+			</div>
+		</section>
+		<section class="recipe-section">
+			<h2 class="content-header">Latest recipes</h2>
+			<div class="recipe-grid">
+				<div class="recipe-preview">
+					recipe preview 1
+				</div>
+				<div class="recipe-preview">
+					recipe preview 2
+				</div>
+				<div class="recipe-preview">
+					recipe preview 3
+				</div>
+			</div>
+		</section>
+	</div>
 </Layout>
 
 <style>
 	.header-section {
+		color: var(--color-text-primary);
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 		text-align: center;
-		padding: 4rem 2rem;
-		max-width: 700px;
-		margin: 0 auto;
-		font-family: var(--default-font);
-		color: var(--color-primary-text);
+		margin-top: var(--space-md);
 	}
 	.site-title {
-		font-size: 3rem;
+		font-size: var(--font-size-h2);
 		font-weight: 500;
+		color: var(--color-text-secondary);
+		margin: 0;
+	}
+	.tagline {
+		color: var(--color-text-tertiary);
+		font-size: var(--font-size-h5);
+		margin: 0; /* resets default */
+		margin-top: var(--space-sm);
+	}
+	.intro {
+		margin-top: var(--space-lg);
+		max-width: 70ch;
+	}
+	.home-page-content-wrapper {
+		margin-top: var(--space-xl);
+	}
+	.content-header {
+		border-top: var(--section-border);
+		font-size: var(--font-size-h6);
+		padding-top: var(--space-sm);
+	}
+	.recipe-section {
+		margin-top: var(--space-md);
+	}
+	.blog-grid, .recipe-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: var(--space-sm);
+	}
+	.blog-preview, .recipe-preview {
+		min-height: 20rem;
+		border: .1rem solid var(--color-border-stronger); /* placeholder for content */
+		text-align: center;
 	}
 </style>
