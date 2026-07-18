@@ -31,7 +31,7 @@ npm run build    # production build to dist/
 
 ## Project structure
 
-<!-- tbd -->
+tbd
 
 ## Roadmap / status
 
