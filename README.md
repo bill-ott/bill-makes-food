@@ -2,7 +2,7 @@
 
 A personal blog for sharing a habit-first, mental model centric, systemic approach to home cooking.
 
-**Live at:** <!-- https://... -->
+**Live at:** tbd <!-- https://... -->
 
 ## Background
 
