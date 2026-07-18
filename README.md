@@ -1,46 +1,41 @@
-# Astro Starter Kit: Basics
+# Bill Makes Food
 
-```sh
-npm create astro@latest -- --template basics
+A personal blog for sharing a habit-first, mental model centric, systemic approach to home cooking.
+
+**Live at:** <!-- https://... -->
+
+## Background
+
+I make cooking content as a hobby and I'm a front-end engineer by trade. This project marries two things I love: cooking and coding.
+I not only wanted an outlet for my writing, I wanted to demonstrate my take on a clean, organized, and slick website.
+
+## Tech stack
+
+- **[Astro](https://astro.build)**
+- Plain HTML/CSS/JavaScript
+- Self-hosted Montserrat via Astro's Fonts API
+- Design tokens: CSS variables simplify styling allowing for seamless incorporation of color palette, type scaling, and consistent spacing.
+
+## Why I built it this way
+
+I chose to build this using Astro because it fits the shape of the project. This is a content site with very little interactivity and thus content-shaped, not app-shaped. Functionality also doesn't rely on state management (for now at least). Astro's multi-page, zero JS shipping by default, injecting JS when needed approach allows this site to load fast and index properly via SEO crawlers. Plus I can use Vue or React components via Astro's "islands" where interactivity calls for it. Bundling an entire front-end framework felt like overkill.
+
+## Getting started
+
+```bash
+# Requires Node 24 (via nvm: nvm use 24)
+npm install
+npm run dev      # local dev server
+npm run build    # production build to dist/
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Project structure
 
-## 🚀 Project Structure
+<!-- tbd -->
 
-Inside of your Astro project, you'll see the following folders and files:
+## Roadmap / status
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
-```
-
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+ - deployment
+ - mobile navigation enhancements
+ - content collections for recipes and blog posts
+ - recipe tags and inter-site linking
