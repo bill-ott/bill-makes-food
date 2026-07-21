@@ -2,7 +2,7 @@
 
 A personal blog for sharing a habit-first, mental model centric, systemic approach to home cooking.
 
-**Live at:** tbd <!-- https://... -->
+**Live at:** [tbd <!-- https://... -->](https://bill-makes-food.netlify.app/)
 
 ## Background
 
