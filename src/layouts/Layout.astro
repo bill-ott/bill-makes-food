@@ -21,7 +21,7 @@ const navLinks = [
 		<Font cssVariable="--font-montserrat" />
 	</head>
 	<body>
-		<header class="site-header">
+		<header class="site-header content-column">
 			<div class="home-link-container">
 				<!-- logo will go here -->
 				<a
@@ -46,11 +46,11 @@ const navLinks = [
 				</ul>
 			</nav>
 		</header>
-		<div class="content-wrapper">
+		<div class="content-wrapper content-column">
 			<slot />
 		</div>
 		<footer>
-			<div class="footer-wrapper">
+			<div class="footer-wrapper content-column">
 				<p class="copyright">
 					© {new Date().getFullYear()} Bill Makes Food. All rights reserved.
 				</p>
@@ -68,6 +68,7 @@ const navLinks = [
 	}
 	:root {
 		--default-font: var(--font-montserrat), sans-serif;
+		--max-content-width: 75rem;
 		
 		/* font sizes (based on Major Third scale) */
 		--font-size-h1: 3.815rem;
@@ -129,6 +130,11 @@ const navLinks = [
 		flex-direction: column;
 		min-height: 100vh;
 		padding: var(--space-md);
+	}
+	.content-column {
+		width: 100%;
+		max-width: var(--max-content-width);
+		margin-inline: auto;
 	}
 	.site-header {
 		display: flex;

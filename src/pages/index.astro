@@ -111,14 +111,11 @@ function formatDate(dateString: string) {
 	}
 	.blog-grid, .recipe-grid {
 		display: grid;
-		grid-template-columns: repeat(3, 1fr);
+		grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
 		gap: var(--space-sm);
 	}
 	.blog-preview, .recipe-preview {
 		min-height: 20rem;
 		border: .1rem solid var(--color-border-stronger); /* placeholder for content */
-	}
-	.post-title-wrapper {
-		text-align: center;
 	}
 </style>
