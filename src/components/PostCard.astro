@@ -1,0 +1,30 @@
+---
+const { href, title, publishDate, previewText } = Astro.props;
+
+function formatDate(dateString: string) {
+	return new Date(dateString).toLocaleDateString('en-US', {
+		month: 'long',
+		day: 'numeric',
+		year: 'numeric',
+		timeZone: 'UTC',
+	});
+}
+---
+<article class="card-preview">
+    <header class="post-title-header">
+        <h3 class="post-title">
+            <a class="title-link" href={href}>{title}</a>
+        </h3>
+        <time class="post-publish-date" datetime={publishDate}>
+            {formatDate(publishDate)}
+        </time>
+    </header>
+    <p class="post-preview-text">{previewText}</p>
+</article>
+
+<style>
+	.card-preview {
+		min-height: 20rem;
+		border: .1rem solid var(--color-border-stronger); /* placeholder for content */
+	}
+</style>
