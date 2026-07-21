@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import PostCard from '../components/PostCard.astro';
 
 const blogPosts = [
 	{href: '/blog/1', title: 'Blog No. 1', publishDate: '2026-07-21', previewText: 'preview text...'},
@@ -12,15 +13,6 @@ const recipePosts = [
 	{href: '/recipes/2', title: 'Recipe No. 2', publishDate: '2026-07-20', previewText: 'preview text...'},
 	{href: '/recipes/3', title: 'Recipe No. 3', publishDate: '2026-07-19', previewText: 'preview text...'},
 ];
-
-function formatDate(dateString: string) {
-	return new Date(dateString).toLocaleDateString('en-US', {
-		month: 'long',
-		day: 'numeric',
-		year: 'numeric',
-		timeZone: 'UTC',
-	});
-}
 ---
 
 <Layout>
@@ -38,17 +30,7 @@ function formatDate(dateString: string) {
 			<h2 class="content-header">Latest posts</h2>
 			<div class="blog-grid">
 				{blogPosts.map(post => (
-					<article class="blog-preview">
-						<div class="post-title-wrapper">
-							<h3 class="post-title">
-								<a class="title-link" href={post.href}>{post.title}</a>
-							</h3>
-							<time class="post-publish-date" datetime={post.publishDate}>
-								{formatDate(post.publishDate)}
-							</time>
-						</div>
-						<p class="post-preview-text">{post.previewText}</p>
-					</article>
+					<PostCard {...post} />
 				))}
 			</div>
 		</section>
@@ -56,17 +38,7 @@ function formatDate(dateString: string) {
 			<h2 class="content-header">Featured recipes</h2>
 			<div class="recipe-grid">
 				{recipePosts.map(post => (
-					<article class="recipe-preview">
-						<div class="post-title-wrapper">
-							<h3 class="post-title">
-								<a class="title-link" href={post.href}>{post.title}</a>
-							</h3>
-							<time class="post-publish-date" datetime={post.publishDate}>
-								{formatDate(post.publishDate)}
-							</time>
-						</div>
-						<p class="post-preview-text">{post.previewText}</p>
-					</article>
+					<PostCard {...post} />
 				))}
 			</div>
 		</section>
@@ -113,9 +85,5 @@ function formatDate(dateString: string) {
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
 		gap: var(--space-sm);
-	}
-	.blog-preview, .recipe-preview {
-		min-height: 20rem;
-		border: .1rem solid var(--color-border-stronger); /* placeholder for content */
 	}
 </style>
