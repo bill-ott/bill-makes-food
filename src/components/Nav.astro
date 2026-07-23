@@ -52,6 +52,7 @@ const navLinks = [
 		navMenuButton.addEventListener('click', () => {
 			const isExpanded = navMenuButton.getAttribute('aria-expanded') === 'true';
 			navMenuButton.setAttribute('aria-expanded', String(!isExpanded));
+            navMenuButton.setAttribute('aria-label', isExpanded ? 'Menu' : 'Close menu');
 		});
 	}
 </script>
@@ -87,7 +88,17 @@ const navLinks = [
             background: none;
             border: none;
             cursor: pointer;
+            padding: 0;
             color: var(--color-link);
+        }
+        .nav-menu-button[aria-expanded="false"] .icon-close {
+            display: none;
+        }
+        .nav-menu-button[aria-expanded="true"]  .icon-menu  {
+            display: none;
+        }
+        .icon-wrapper {
+            display: flex;
         }
         .nav-list {
             display: none;
@@ -98,6 +109,4 @@ const navLinks = [
             background-color: var(--color-more-off-white);
         }
     }
-    .nav-menu-button[aria-expanded="false"] .icon-close { display: none; }
-    .nav-menu-button[aria-expanded="true"]  .icon-menu  { display: none; }
 </style>
