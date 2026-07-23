@@ -7,6 +7,7 @@ const navLinks = [
 	{href: '/about', label: 'About'},
 	{href: '/contact', label: 'Contact'},
 ];
+
 ---
 
 <!doctype html>
@@ -35,8 +36,21 @@ const navLinks = [
 				<button
 					class="nav-menu-button"
 					aria-expanded="false"
-					aria-controls="nav-list">
-					menu
+					aria-controls="nav-list"
+					aria-label="Menu">
+					<svg
+						aria-hidden="true"
+						viewBox="0 0 24 24"
+						width="2.5em"
+						height="2.5em"
+						stroke="currentColor"
+						stroke-width="2"
+						stroke-linecap="round"
+					>
+						<line x1="2" y1="7" x2="22" y2="7" />
+						<line x1="2" y1="12" x2="22" y2="12" />
+						<line x1="2" y1="17" x2="22" y2="17" />
+					</svg>
 				</button>
 				<ul class="nav-list">
 					{navLinks.map(link => (
@@ -73,7 +87,6 @@ const navLinks = [
 	if (navMenuButton) {
 		navMenuButton.addEventListener('click', () => {
 			const isExpanded = navMenuButton.getAttribute('aria-expanded') === 'true';
-			console.log({isExpanded})
 			navMenuButton.setAttribute('aria-expanded', String(!isExpanded));
 		});
 	}
@@ -185,6 +198,10 @@ const navLinks = [
 	@media (max-width: 40rem) {
 		.nav-menu-button {
 			display: block;
+			background: none;
+			border: none;
+			cursor: pointer;
+			color: var(--color-link);
 		}
 		.nav-list {
 			display: none;
