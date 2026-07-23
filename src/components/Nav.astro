@@ -1,0 +1,97 @@
+---
+import NavMenuButton from "../components/NavMenuButton.astro";
+const pathname = Astro.url.pathname;
+const navLinks = [
+	{href: '/blog', label: 'Blog'},
+	{href: '/recipes', label: 'Recipes'},
+	{href: '/about', label: 'About'},
+	{href: '/contact', label: 'Contact'},
+];
+---
+<div class="home-link-container">
+    <!-- logo will go here -->
+    <a
+        class="home-link"
+        href="/"
+        aria-current={pathname === "/" ? "page" : undefined}>
+        Bill Makes Food
+    </a>
+</div>
+<nav class="site-nav">
+    <button
+        class="nav-menu-button"
+        aria-expanded="false"
+        aria-controls="nav-list"
+        aria-label="Menu">
+        <NavMenuButton />
+    </button>
+    <ul class="nav-list">
+        {navLinks.map(link => (
+            <li class="nav-list-item">
+                <a
+                    class="nav-link"
+                    href={link.href}
+                    aria-current={pathname === link.href ? "page" : undefined}>
+                    {link.label}
+                </a>
+            </li>
+        ))}
+    </ul>
+</nav>
+
+<script>
+	const navMenuButton = document.querySelector('.nav-menu-button');
+	if (navMenuButton) {
+		navMenuButton.addEventListener('click', () => {
+			const isExpanded = navMenuButton.getAttribute('aria-expanded') === 'true';
+			navMenuButton.setAttribute('aria-expanded', String(!isExpanded));
+		});
+	}
+</script>
+
+<style>
+    .home-link {
+		color: var(--color-text-secondary);
+		text-decoration: none;
+	}
+	.home-link:hover {
+		color: color-mix(in srgb, var(--color-text-secondary) 65%, transparent);
+	}
+    .nav-link {
+		color: var(--color-link);
+		text-decoration: none;
+	}
+	.nav-link:hover {
+		color: color-mix(in srgb, var(--color-link) 65%, transparent);
+	}
+	.nav-list {
+		margin: 0;
+		padding: 0;
+		list-style-type: none;
+		display: flex;
+		gap: var(--space-lg);
+	}
+	.nav-menu-button {
+		display: none;
+	}
+    .nav-menu-button {
+        display: none;
+    }
+    @media (max-width: 40rem) {
+        .nav-menu-button {
+            display: block;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--color-link);
+        }
+        .nav-list {
+            display: none;
+        }
+        .nav-menu-button[aria-expanded="true"]+.nav-list {
+            display: flex;
+            flex-direction: column;
+            background-color: var(--color-more-off-white);
+        }
+    }
+</style>
