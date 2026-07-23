@@ -1,5 +1,6 @@
 ---
-import NavMenuButton from "../components/NavMenuButton.astro";
+import NavMenuIcon from "../components/NavMenuIcon.astro";
+import NavCloseIcon from "../components/NavCloseIcon.astro";
 const pathname = Astro.url.pathname;
 const navLinks = [
 	{href: '/blog', label: 'Blog'},
@@ -20,12 +21,18 @@ const navLinks = [
 <nav class="site-nav">
     <button
         class="nav-menu-button"
+        id="nav-menu-button"
         aria-expanded="false"
         aria-controls="nav-list"
         aria-label="Menu">
-        <NavMenuButton />
+        <span class="icon-wrapper icon-menu">
+            <NavMenuIcon />
+        </span>
+        <span class="icon-wrapper icon-close">
+            <NavCloseIcon />
+        </span>
     </button>
-    <ul class="nav-list">
+    <ul class="nav-list" id="nav-list">
         {navLinks.map(link => (
             <li class="nav-list-item">
                 <a
@@ -40,7 +47,7 @@ const navLinks = [
 </nav>
 
 <script>
-	const navMenuButton = document.querySelector('.nav-menu-button');
+	const navMenuButton = document.querySelector('#nav-menu-button');
 	if (navMenuButton) {
 		navMenuButton.addEventListener('click', () => {
 			const isExpanded = navMenuButton.getAttribute('aria-expanded') === 'true';
@@ -71,9 +78,6 @@ const navLinks = [
 		display: flex;
 		gap: var(--space-lg);
 	}
-	.nav-menu-button {
-		display: none;
-	}
     .nav-menu-button {
         display: none;
     }
@@ -94,4 +98,6 @@ const navLinks = [
             background-color: var(--color-more-off-white);
         }
     }
+    .nav-menu-button[aria-expanded="false"] .icon-close { display: none; }
+    .nav-menu-button[aria-expanded="true"]  .icon-menu  { display: none; }
 </style>

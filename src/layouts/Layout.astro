@@ -40,7 +40,10 @@ import Nav from "../components/Nav.astro";
 	}
 	:root {
 		--default-font: var(--font-montserrat), sans-serif;
+		
+		/* element sizing */
 		--max-content-width: 75rem;
+		--min-header-height: 3rem;
 		
 		/* font sizes (based on Major Third scale) */
 		--font-size-h1: 3.815rem;
@@ -112,6 +115,7 @@ import Nav from "../components/Nav.astro";
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
+		min-height: var(--min-header-height);
 	}
 	.content-wrapper {
 		flex: 1;
