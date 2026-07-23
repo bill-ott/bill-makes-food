@@ -32,6 +32,12 @@ const navLinks = [
 				</a>
 			</div>
 			<nav class="site-nav">
+				<button
+					class="nav-menu-button"
+					aria-expanded="false"
+					aria-controls="nav-list">
+					menu
+				</button>
 				<ul class="nav-list">
 					{navLinks.map(link => (
 						<li class="nav-list-item">
@@ -60,7 +66,18 @@ const navLinks = [
 			</div>
 		</footer>
 	</body>
-</html>
+	</html>
+	
+<script>
+	const navMenuButton = document.querySelector('.nav-menu-button');
+	if (navMenuButton) {
+		navMenuButton.addEventListener('click', () => {
+			const isExpanded = navMenuButton.getAttribute('aria-expanded') === 'true';
+			console.log({isExpanded})
+			navMenuButton.setAttribute('aria-expanded', String(!isExpanded));
+		});
+	}
+</script>
 
 <style>
 	*, *::before, *::after {
@@ -161,6 +178,22 @@ const navLinks = [
 		list-style-type: none;
 		display: flex;
 		gap: var(--space-lg);
+	}
+	.nav-menu-button {
+		display: none;
+	}
+	@media (max-width: 40rem) {
+		.nav-menu-button {
+			display: block;
+		}
+		.nav-list {
+			display: none;
+		}
+		.nav-menu-button[aria-expanded="true"]+.nav-list {
+			display: flex;
+			flex-direction: column;
+			background-color: var(--color-more-off-white);
+		}
 	}
 	.content-wrapper {
 		flex: 1;
