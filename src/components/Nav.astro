@@ -1,0 +1,152 @@
+---
+import NavMenuIcon from "../components/icons/NavMenuIcon.astro";
+import NavCloseIcon from "../components/icons/NavCloseIcon.astro";
+const pathname = Astro.url.pathname;
+const navLinks = [
+	{href: '/blog', label: 'Blog'},
+	{href: '/recipes', label: 'Recipes'},
+	{href: '/about', label: 'About'},
+	{href: '/contact', label: 'Contact'},
+];
+---
+<div class="home-link-container">
+    <!-- logo will go here -->
+    <a
+        class="home-link"
+        href="/"
+        aria-current={pathname === "/" ? "page" : undefined}>
+        Bill Makes Food
+    </a>
+</div>
+<nav class="site-nav">
+    <button
+        class="nav-menu-button"
+        id="nav-menu-button"
+        type="button"
+        aria-expanded="false"
+        aria-controls="nav-list"
+        aria-label="Menu">
+        <span class="icon-wrapper icon-menu">
+            <NavMenuIcon />
+        </span>
+        <span class="icon-wrapper icon-close">
+            <NavCloseIcon />
+        </span>
+    </button>
+    <ul class="nav-list" id="nav-list">
+        {navLinks.map(link => (
+            <li class="nav-list-item">
+                <a
+                    class="nav-link"
+                    href={link.href}
+                    aria-current={pathname === link.href ? "page" : undefined}>
+                    {link.label}
+                </a>
+            </li>
+        ))}
+    </ul>
+</nav>
+
+<script>
+	const navMenuButton = document.querySelector<HTMLButtonElement>('#nav-menu-button');
+	if (navMenuButton) {
+        const setExpanded = (expanded: boolean) => {
+            navMenuButton.setAttribute('aria-expanded', String(expanded));
+            navMenuButton.setAttribute('aria-label', expanded ? 'Close menu' : 'Menu');
+        };
+
+        navMenuButton.addEventListener('click', () => {
+            const isExpanded = navMenuButton.getAttribute('aria-expanded') === 'true';
+            setExpanded(!isExpanded);
+        });
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key !== 'Escape') return;
+            if (navMenuButton.getAttribute('aria-expanded') !== 'true') return;
+            setExpanded(false);
+            navMenuButton.focus();
+        });
+
+        document.addEventListener('click', (event) => {
+            if ((event.target as Element).closest('.site-nav') !== null) return;
+            if (navMenuButton.getAttribute('aria-expanded') !== 'true') return;
+            setExpanded(false);
+        });
+	}
+</script>
+
+<style>
+    .site-nav {
+        position: relative;
+    }
+    .home-link {
+		color: var(--color-text-secondary);
+		text-decoration: none;
+	}
+	.home-link:hover {
+		color: color-mix(in srgb, var(--color-text-secondary) 65%, transparent);
+	}
+    .nav-link {
+		color: var(--color-link);
+		text-decoration: none;
+	}
+	.nav-link:hover {
+		color: color-mix(in srgb, var(--color-link) 65%, transparent);
+	}
+	.nav-list {
+		margin: 0;
+		padding: 0;
+		list-style-type: none;
+		display: flex;
+		gap: var(--space-lg);
+	}
+    .nav-menu-button {
+        display: none;
+    }
+    @media (max-width: 40rem) {
+        .nav-menu-button {
+            display: block;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            color: var(--color-link);
+        }
+        .nav-menu-button[aria-expanded="false"] .icon-close {
+            display: none;
+        }
+        .nav-menu-button[aria-expanded="true"]  .icon-menu  {
+            display: none;
+        }
+        .icon-wrapper {
+            display: flex;
+        }
+        .nav-list {
+            display: none;
+        }
+        .nav-menu-button[aria-expanded="true"]+.nav-list {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            right: 0;
+            gap: 0;
+            background-color: var(--color-surface);
+            box-shadow: var(--shadow-sm);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        .nav-link {
+            display: block;
+            padding: var(--space-sm);
+        }
+        .nav-link:hover {
+            background-color: var(--color-surface-hover);
+            color: var(--color-link);
+        }
+        .nav-link:focus-visible {
+            background-color: var(--color-surface-hover);
+            outline: 2px solid var(--color-link);
+            outline-offset: -3px;
+        }
+    }
+</style>
