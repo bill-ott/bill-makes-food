@@ -1,22 +1,14 @@
 ---
-const { href, title, publishDate, previewText } = Astro.props;
+const { href, title, dateRaw, publishDate, previewText } = Astro.props;
 
-function formatDate(dateString: string) {
-	return new Date(dateString).toLocaleDateString('en-US', {
-		month: 'long',
-		day: 'numeric',
-		year: 'numeric',
-		timeZone: 'UTC',
-	});
-}
 ---
 <article class="card-preview">
     <header class="post-title-header">
         <h3 class="post-title">
             <a class="title-link" href={href}>{title}</a>
         </h3>
-        <time class="post-publish-date" datetime={publishDate}>
-            {formatDate(publishDate)}
+        <time class="post-publish-date" datetime={dateRaw}>
+            {publishDate}
         </time>
     </header>
     <p class="post-preview-text">{previewText}</p>
