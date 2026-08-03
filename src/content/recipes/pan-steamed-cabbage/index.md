@@ -1,9 +1,10 @@
 ---
-title: Miso eggplant
-publishDate: 2026-07-23
-cookTime: 20
-summary: Caramelized miso elevates eggplant in a way I didn't really expect.
-tags: [vegetarian, Japanese, eggplant, side dish]
+title: Pan steamed cabbage
+publishDate: 2026-07-20
+cookTime: 10
+summary: This simple dish is less a recipe and more of a technique.
+tags: [vegetarian, side dish, cabbage]
+heroImage: ./hero.png
 ---
 
 This is the body. Everything below the closing fence is Markdown that becomes the rendered page.

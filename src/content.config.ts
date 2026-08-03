@@ -12,12 +12,13 @@ const blog = defineCollection({
 
 const recipes = defineCollection({
   loader: glob({ base: './src/content/recipes', pattern: '**/*.md' }),
-  schema: z.object({
+  schema: ({ image }) => z.object({
     title: z.string(),
     publishDate: z.coerce.date(),
     cookTime: z.int(),
     summary: z.string(),
     tags: z.array(z.string()),
+    heroImage: image().optional(),
   }),
 });
 
