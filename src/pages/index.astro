@@ -18,29 +18,35 @@ function formatDate(date: Date) {
 }
 
 const posts = await getCollection('blog');
-const postData = posts.map(post => {
-	return {
-		href: `/blog/${post.id}`,
-		title: post.data.title,
-		dateRaw: formatRawDate(post.data.publishDate),
-		publishDate: formatDate(post.data.publishDate),
-		previewText: post.data.previewText,
-	};
-});
+const postData = [...posts]
+	.sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
+	.slice(0, 4)
+	.map(post => {
+		return {
+			href: `/blog/${post.id}`,
+			title: post.data.title,
+			dateRaw: formatRawDate(post.data.publishDate),
+			publishDate: formatDate(post.data.publishDate),
+			previewText: post.data.previewText,
+		};
+	});
 
 const recipes = await getCollection('recipes');
-const recipeData = recipes.map(recipe => {
-	return {
-		href: `/recipes/${recipe.id}`,
-		title: recipe.data.title,
-		dateRaw: formatRawDate(recipe.data.publishDate),
-		publishDate: formatDate(recipe.data.publishDate),
-		cookTime: recipe.data.cookTime,
-		summary: recipe.data.summary,
-		tags: recipe.data.tags,
-		heroImage: recipe.data.heroImage,
-	};
-});
+const recipeData = [...recipes]
+	.sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
+	.slice(0, 4)
+	.map(recipe => {
+		return {
+			href: `/recipes/${recipe.id}`,
+			title: recipe.data.title,
+			dateRaw: formatRawDate(recipe.data.publishDate),
+			publishDate: formatDate(recipe.data.publishDate),
+			cookTime: recipe.data.cookTime,
+			summary: recipe.data.summary,
+			tags: recipe.data.tags,
+			heroImage: recipe.data.heroImage,
+		};
+	});
 ---
 
 <Layout>
@@ -55,13 +61,13 @@ const recipeData = recipes.map(recipe => {
 	</section>
 	<div class="home-page-content-wrapper">
 		<section class="blog-section">
-			<h2 class="content-header">LATEST POSTS</h2>
+			<h2 class="content-header">Latest posts</h2>
 			<div class="blog-grid">
 				{postData.map(post => <PostCard {...post} />)}
 			</div>
 		</section>
 		<section class="recipe-section">
-			<h2 class="content-header">LATEST RECIPES</h2>
+			<h2 class="content-header">Latest recipes</h2>
 			<div class="recipe-grid">
 				{recipeData.map(recipe => <RecipeCard {...recipe} />)}
 			</div>
@@ -102,13 +108,19 @@ const recipeData = recipes.map(recipe => {
 		font-size: var(--font-size-p);
 		padding-top: var(--space-sm);
 		color: var(--color-text-tertiary);
+		text-transform: uppercase;
 	}
 	.recipe-section {
 		margin-top: var(--space-md);
 	}
 	.blog-grid, .recipe-grid {
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+		grid-template-columns: repeat(2, 1fr);
 		gap: var(--space-sm);
+	}
+	@media (max-width: 40rem) {
+		.blog-grid, .recipe-grid {
+			grid-template-columns: 1fr;
+		}
 	}
 </style>

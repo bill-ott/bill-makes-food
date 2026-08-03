@@ -30,25 +30,25 @@ const { href, title, dateRaw, publishDate, cookTime, summary, tags, heroImage } 
             <p class="cook-time">{cookTime} mins</p>
         </div>
     </header>
-    <section class="card-content">
-        <div class="card-image-wrapper">
-            {heroImage && (
-                <Image
-                    src={heroImage}
-                    alt={title}
-                    class="card-image" />
-            )}
-        </div>
-        <p class="post-preview-text">{summary}</p>
-        <div class="tag-wrapper">
-            {tags.map(tag => <p class="tag">{tag}</p>)}
-        </div>
-        <p class="full-recipe-text">Read the full recipe →</p>
-    </section>
+    <div class="card-image-wrapper">
+        {heroImage && (
+            <Image
+                src={heroImage}
+                alt={title}
+                class="card-image" />
+        )}
+    </div>
+    <p class="post-preview-text">{summary}</p>
+    <div class="tag-wrapper">
+        {tags.map(tag => <p class="tag">{tag}</p>)}
+    </div>
+    <p class="full-recipe-text">Read the full recipe →</p>
 </article>
 
 <style>
 	.card-preview {
+        display: flex;
+        flex-direction: column;
         position: relative;
         padding: var(--space-sm);
         border-radius: var(--radius-base);
@@ -117,7 +117,8 @@ const { href, title, dateRaw, publishDate, cookTime, summary, tags, heroImage } 
         white-space: nowrap;
     }
     .full-recipe-text {
-        margin: var(--space-sm) 0 0;
+        margin-top: auto;
+        padding-top: var(--space-sm);
         color: var(--color-link);
         font-weight: 500;
     }

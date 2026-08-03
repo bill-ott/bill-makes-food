@@ -1,6 +1,6 @@
 ---
 title: Post One
-publishDate: 2026-07-23
+publishDate: 2026-07-01
 previewText: Placeholder text for the post
 ---
 
