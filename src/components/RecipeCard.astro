@@ -19,7 +19,9 @@ const { href, title, dateRaw, publishDate, cookTime, summary, tags, heroImage } 
 ---
 <article class="card-preview">
     <header class="post-title-header">
-        <h3 class="post-title">{title}</h3>
+        <h3 class="post-title">
+            <a class="title-link" href={href}>{title}</a>
+        </h3>
         <div class="date-wrapper">
             <time class="post-publish-date" datetime={dateRaw}>
                 {publishDate}
@@ -39,17 +41,27 @@ const { href, title, dateRaw, publishDate, cookTime, summary, tags, heroImage } 
         <div class="tag-wrapper">
             {tags.map(tag => <p class="tag">{tag}</p>)}
         </div>
-        <a class="full-recipe-link" href={href}>Read the full recipe →</a>
+        <p class="full-recipe-text">Read the full recipe →</p>
     </section>
 </article>
 
 <style>
 	.card-preview {
         padding-bottom: var(--space-md);
+        position: relative;
 	}
     .post-title {
         font-size: var(--font-size-h5);
         margin: 0;
+    }
+    .title-link {
+        color: var(--color-text-primary);
+        text-decoration: none;
+    }
+    .title-link::after {
+        content: "";
+        position: absolute;
+        inset: 0;
     }
     .date-wrapper {
         color: var(--color-text-tertiary);
@@ -89,11 +101,9 @@ const { href, title, dateRaw, publishDate, cookTime, summary, tags, heroImage } 
         margin: 0;
         white-space: nowrap;
     }
-    .full-recipe-link {
-        display: inline-block;
+    .full-recipe-text {
+        margin: var(--space-sm) 0 0;
         color: var(--color-link);
         font-weight: 500;
-        margin-top: var(--space-sm);
-        text-decoration: none;
     }
 </style>
