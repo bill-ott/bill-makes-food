@@ -9,9 +9,10 @@ type Props = {
     publishDate: string;
     summary: string;
     heroImage?: ImageMetadata;
+    loading?: 'lazy' | 'eager';
 };
 
-const { href, title, dateRaw, publishDate, summary, heroImage } = Astro.props;
+const { href, title, dateRaw, publishDate, summary, heroImage,loading = 'lazy' } = Astro.props;
 
 ---
 <article class="card-preview">
@@ -30,6 +31,7 @@ const { href, title, dateRaw, publishDate, summary, heroImage } = Astro.props;
             <Image
                 src={heroImage}
                 alt={title}
+                loading={loading}
                 class="card-image" />
         )}
     </div>
