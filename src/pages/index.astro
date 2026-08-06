@@ -27,7 +27,8 @@ const postData = [...posts]
 			title: post.data.title,
 			dateRaw: formatRawDate(post.data.publishDate),
 			publishDate: formatDate(post.data.publishDate),
-			previewText: post.data.previewText,
+			summary: post.data.summary,
+			heroImage: post.data.heroImage,
 		};
 	});
 
@@ -113,13 +114,23 @@ const recipeData = [...recipes]
 	.recipe-section {
 		margin-top: var(--space-md);
 	}
-	.blog-grid, .recipe-grid {
+	.blog-grid {
+		display: grid;
+		grid-template-columns: repeat(1, 1fr);
+		gap: var(--space-sm);
+	}
+	@media (max-width: 40rem) {
+		.blog-grid{
+			grid-template-columns: 1fr;
+		}
+	}
+	.recipe-grid {
 		display: grid;
 		grid-template-columns: repeat(2, 1fr);
 		gap: var(--space-sm);
 	}
 	@media (max-width: 40rem) {
-		.blog-grid, .recipe-grid {
+		.recipe-grid {
 			grid-template-columns: 1fr;
 		}
 	}

@@ -1,12 +1,14 @@
-import { defineCollection, z } from 'astro:content';
+import { defineCollection, z, reference } from 'astro:content';
 import { glob } from 'astro/loaders';
 
 const blog = defineCollection({
   loader: glob({ base: './src/content/blog', pattern: '**/*.md' }),
-  schema: z.object({
+  schema: ({ image }) => z.object({
     title: z.string(),
     publishDate: z.coerce.date(),
-    previewText: z.string(),
+    summary: z.string(),
+    relatedRecipes: z.array(reference('recipes')).optional(),
+    heroImage: image().optional(),
   }),
 });
 
