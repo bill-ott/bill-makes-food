@@ -20,7 +20,7 @@ const recipes = defineCollection({
     cookTime: z.int(),
     summary: z.string(),
     tags: z.array(z.string()),
-    heroImage: image().optional(),
+    heroImage: image(),
   }),
 });
 

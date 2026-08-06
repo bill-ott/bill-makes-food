@@ -19,43 +19,35 @@ function formatDate(date: Date) {
 
 const posts = await getCollection('blog');
 
-const sortedPosts = [...posts]
+const sortedPreviewPosts = [...posts] // only first 3 will show
+	.sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
+	.slice(0, 3);
+
+const postData = sortedPreviewPosts.map((post) => ({
+	href: `/blog/${post.id}`,
+	title: post.data.title,
+	dateRaw: formatRawDate(post.data.publishDate),
+	publishDate: formatDate(post.data.publishDate),
+	summary: post.data.summary,
+}));
+
+const recipes = await getCollection('recipes');
+
+const sortedPreviewRecipes = [...recipes] // only first 4 will show
 	.sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
 	.slice(0, 4);
 
-const firstImagePostId = sortedPosts.find(post => post.data.heroImage)?.id;
-
-const postData = [...posts]
-	.sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
-	.slice(0, 4)
-	.map((post) => {
-		return {
-			href: `/blog/${post.id}`,
-			title: post.data.title,
-			dateRaw: formatRawDate(post.data.publishDate),
-			publishDate: formatDate(post.data.publishDate),
-			summary: post.data.summary,
-			heroImage: post.data.heroImage,
-			loading: post.id === firstImagePostId ? 'eager' as const : 'lazy' as const,
-		};
-	});
-
-const recipes = await getCollection('recipes');
-const recipeData = [...recipes]
-	.sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
-	.slice(0, 4)
-	.map(recipe => {
-		return {
-			href: `/recipes/${recipe.id}`,
-			title: recipe.data.title,
-			dateRaw: formatRawDate(recipe.data.publishDate),
-			publishDate: formatDate(recipe.data.publishDate),
-			cookTime: recipe.data.cookTime,
-			summary: recipe.data.summary,
-			tags: recipe.data.tags,
-			heroImage: recipe.data.heroImage,
-		};
-	});
+const recipeData = sortedPreviewRecipes.map((recipe, i) => ({
+	href: `/recipes/${recipe.id}`,
+	title: recipe.data.title,
+	dateRaw: formatRawDate(recipe.data.publishDate),
+	publishDate: formatDate(recipe.data.publishDate),
+	cookTime: recipe.data.cookTime,
+	summary: recipe.data.summary,
+	tags: recipe.data.tags,
+	heroImage: recipe.data.heroImage,
+	loading: i < 2 ? 'eager' as const : 'lazy' as const,
+}));
 ---
 
 <Layout>
@@ -102,8 +94,7 @@ const recipeData = [...recipes]
 	.tagline {
 		color: var(--color-text-tertiary);
 		font-size: var(--font-size-h5);
-		margin: 0; /* resets default */
-		margin-top: var(--space-sm);
+		margin: var(--space-sm) 0 0;
 	}
 	.intro {
 		margin-top: var(--space-lg);
@@ -124,13 +115,8 @@ const recipeData = [...recipes]
 	}
 	.blog-grid {
 		display: grid;
-		grid-template-columns: repeat(1, 1fr);
+		grid-template-columns: 1fr;
 		gap: var(--space-sm);
-	}
-	@media (max-width: 40rem) {
-		.blog-grid{
-			grid-template-columns: 1fr;
-		}
 	}
 	.recipe-grid {
 		display: grid;

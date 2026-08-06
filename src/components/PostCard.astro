@@ -1,18 +1,13 @@
 ---
-import { Image } from 'astro:assets';
-import type { ImageMetadata } from 'astro';
-
 type Props = {
     href: string;
     title: string;
     dateRaw: string;
     publishDate: string;
     summary: string;
-    heroImage?: ImageMetadata;
-    loading?: 'lazy' | 'eager';
 };
 
-const { href, title, dateRaw, publishDate, summary, heroImage,loading = 'lazy' } = Astro.props;
+const { href, title, dateRaw, publishDate, summary } = Astro.props;
 
 ---
 <article class="card-preview">
@@ -20,29 +15,17 @@ const { href, title, dateRaw, publishDate, summary, heroImage,loading = 'lazy' }
         <h3 class="post-title">
             <a class="title-link" href={href}>{title}</a>
         </h3>
-        <div class="date-wrapper">
-            <time class="post-publish-date" datetime={dateRaw}>
-                {publishDate}
-            </time>
-        </div>
+        <time class="post-publish-date" datetime={dateRaw}>
+            {publishDate}
+        </time>
     </header>
-    <div class="card-image-wrapper">
-        {heroImage && (
-            <Image
-                src={heroImage}
-                alt={title}
-                loading={loading}
-                class="card-image" />
-        )}
-    </div>
     <p class="post-preview-text">{summary}</p>
+    <!-- "read more" text looks like a link, but redirect is handled by after on title -->
     <p class="full-post-text">Read more →</p>
 </article>
 
 <style>
 	.card-preview {
-        display: flex;
-        flex-direction: column;
         position: relative;
         padding: var(--space-sm);
         border-radius: var(--radius-base);
@@ -50,9 +33,6 @@ const { href, title, dateRaw, publishDate, summary, heroImage,loading = 'lazy' }
 	}
     .card-preview:hover {
         background-color: var(--color-surface-hover);
-    }
-    .card-preview:hover .card-image {
-        transform: scale(1.03);
     }
     .post-title {
         font-size: var(--font-size-h5);
@@ -67,51 +47,17 @@ const { href, title, dateRaw, publishDate, summary, heroImage,loading = 'lazy' }
         position: absolute;
         inset: 0;
     }
-    .date-wrapper {
+    .post-publish-date {
+        display: inline-block;
         color: var(--color-text-tertiary);
         font-size: var(--font-size-sm);
         margin-top: var(--space-xs);
-        display: flex;
-    }
-    .date-divider {
-        margin: 0;
-        padding: 0 var(--space-xs);
-    }
-    .cook-time {
-        margin: 0;
-    }
-    .card-image-wrapper {
-        overflow: hidden;
-        margin-top: var(--space-sm);
-    }
-    .card-image {
-        width: 100%;
-        height: 20rem;
-        object-fit: cover;
-        display: block;
-        transition: transform 0.2s ease;
     }
     .post-preview-text {
         margin: var(--space-sm) 0 0;
     }
-    .tag-wrapper {
-        display: flex;
-        gap: var(--space-xs);
-        margin-top: var(--space-sm);
-        flex-wrap: wrap;
-    }
-    .tag {
-        font-size: var(--font-size-sm);
-        color: var(--color-text-tertiary);
-        font-weight: 500;
-        background-color: var(--color-surface);
-        padding: var(--space-xs) var(--space-sm);
-        border-radius: var(--radius-pill);
-        margin: 0;
-        white-space: nowrap;
-    }
     .full-post-text {
-        margin-top: auto;
+        margin-top: 0;
         padding-top: var(--space-sm);
         color: var(--color-link);
         font-weight: 500;

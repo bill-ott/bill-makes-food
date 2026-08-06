@@ -10,10 +10,11 @@ type Props = {
 	cookTime: number;
 	summary: string;
 	tags: string[];
-    heroImage?: ImageMetadata;
+    heroImage: ImageMetadata;
+    loading?: 'lazy' | 'eager';
 };
 
-const { href, title, dateRaw, publishDate, cookTime, summary, tags, heroImage } = Astro.props;
+const { href, title, dateRaw, publishDate, cookTime, summary, tags, heroImage, loading = 'lazy' } = Astro.props;
 
 
 ---
@@ -26,21 +27,20 @@ const { href, title, dateRaw, publishDate, cookTime, summary, tags, heroImage } 
             <time class="post-publish-date" datetime={dateRaw}>
                 {publishDate}
             </time>
-            <p class="date-divider">•</p>
-            <p class="cook-time">{cookTime} mins</p>
+            <span class="date-divider">•</span>
+            <span class="cook-time">{cookTime} mins</span>
         </div>
     </header>
     <div class="card-image-wrapper">
-        {heroImage && (
-            <Image
-                src={heroImage}
-                alt={title}
-                class="card-image" />
-        )}
+        <Image
+            src={heroImage}
+            alt={title}
+            loading={loading}
+            class="card-image" />
     </div>
     <p class="post-preview-text">{summary}</p>
     <div class="tag-wrapper">
-        {tags.map(tag => <p class="tag">{tag}</p>)}
+        {tags.map(tag => <span class="tag">{tag}</span>)}
     </div>
     <p class="full-recipe-text">Read the full recipe →</p>
 </article>
@@ -80,11 +80,7 @@ const { href, title, dateRaw, publishDate, cookTime, summary, tags, heroImage } 
         display: flex;
     }
     .date-divider {
-        margin: 0;
         padding: 0 var(--space-xs);
-    }
-    .cook-time {
-        margin: 0;
     }
     .card-image-wrapper {
         overflow: hidden;
