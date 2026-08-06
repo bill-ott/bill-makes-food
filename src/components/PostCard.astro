@@ -1,5 +1,13 @@
 ---
-const { href, title, dateRaw, publishDate, previewText } = Astro.props;
+type Props = {
+    href: string;
+    title: string;
+    dateRaw: string;
+    publishDate: string;
+    summary: string;
+};
+
+const { href, title, dateRaw, publishDate, summary } = Astro.props;
 
 ---
 <article class="card-preview">
@@ -11,12 +19,47 @@ const { href, title, dateRaw, publishDate, previewText } = Astro.props;
             {publishDate}
         </time>
     </header>
-    <p class="post-preview-text">{previewText}</p>
+    <p class="post-preview-text">{summary}</p>
+    <!-- "read more" text looks like a link, but redirect is handled by after on title -->
+    <p class="full-post-text">Read more →</p>
 </article>
 
 <style>
 	.card-preview {
-		min-height: 20rem;
-		border: .1rem solid var(--color-border-stronger); /* placeholder for content */
+        position: relative;
+        padding: var(--space-sm);
+        border-radius: var(--radius-base);
+        transition: background-color 0.2s ease;
 	}
+    .card-preview:hover {
+        background-color: var(--color-surface-hover);
+    }
+    .post-title {
+        font-size: var(--font-size-h5);
+        margin: 0;
+    }
+    .title-link {
+        color: var(--color-text-primary);
+        text-decoration: none;
+    }
+    .title-link::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+    }
+    .post-publish-date {
+        display: inline-block;
+        color: var(--color-text-tertiary);
+        font-size: var(--font-size-sm);
+        margin-top: var(--space-xs);
+    }
+    .post-preview-text {
+        margin: var(--space-sm) 0 0;
+    }
+    .full-post-text {
+        margin-top: 0;
+        padding-top: var(--space-sm);
+        color: var(--color-link);
+        font-weight: 500;
+    }
 </style>
