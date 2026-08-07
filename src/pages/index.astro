@@ -2,20 +2,8 @@
 import Layout from '../layouts/Layout.astro';
 import PostCard from '../components/PostCard.astro';
 import RecipeCard from '../components/RecipeCard.astro';
+import { formatRawDate, formatDate } from '../utils/helpers';
 import { getCollection } from 'astro:content';
-
-function formatRawDate(date: Date) {
-	return date.toISOString().split('T')[0];
-}
-
-function formatDate(date: Date) {
-	return date.toLocaleDateString('en-US', {
-		month: 'long',
-		day: 'numeric',
-		year: 'numeric',
-		timeZone: 'UTC',
-	});
-}
 
 const posts = await getCollection('blog');
 
@@ -66,12 +54,24 @@ const recipeData = sortedPreviewRecipes.map((recipe, i) => ({
 			<div class="blog-grid">
 				{postData.map(post => <PostCard {...post} />)}
 			</div>
+			<a
+				class="see-all-link"
+				href="/blog"
+			>
+				See all posts	
+			</a>
 		</section>
 		<section class="recipe-section">
 			<h2 class="content-header">Latest recipes</h2>
 			<div class="recipe-grid">
 				{recipeData.map(recipe => <RecipeCard {...recipe} />)}
 			</div>
+			<a
+				class="see-all-link"
+				href="/recipes"
+			>
+				See all recipes	
+			</a>
 		</section>
 	</div>
 </Layout>
@@ -113,10 +113,22 @@ const recipeData = sortedPreviewRecipes.map((recipe, i) => ({
 	.recipe-section {
 		margin-top: var(--space-md);
 	}
+	.blog-section, .recipe-section {
+		display: flex;
+		flex-direction: column;
+	}
 	.blog-grid {
 		display: grid;
 		grid-template-columns: 1fr;
 		gap: var(--space-sm);
+	}
+	.see-all-link {
+		margin: var(--space-sm) auto 0;
+		text-decoration: none;
+		color: var(--color-link);
+	}
+	.see-all-link:hover {
+		color: color-mix(in srgb, var(--color-link) 65%, transparent);
 	}
 	.recipe-grid {
 		display: grid;
