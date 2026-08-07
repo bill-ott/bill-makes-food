@@ -1,6 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import PostCard from '../../components/PostCard.astro';
+import EssayCard from '../../components/EssayCard.astro';
 import type { GetStaticPathsOptions } from 'astro';
 import { sortPostsByDate, createEssayData } from '../../utils/helpers';
 import { getCollection } from 'astro:content';
@@ -20,7 +20,7 @@ const essayData = page.data.map(createEssayData);
 		<h1 class="site-title">Blog</h1>
 	</section>
 	<div class="blog-grid">
-		{essayData.map(essay => <PostCard {...essay} />)}
+		{essayData.map(essay => <EssayCard {...essay} />)}
 	</div>
 	<nav
 		class="blog-page-nav"
@@ -32,9 +32,7 @@ const essayData = page.data.map(createEssayData);
 				← Prev
 			</a>
 		}
-		<span class="page-indicator">
-			Page {page.currentPage} of {page.lastPage}
-		</span>
+		<span class="page-indicator">Page {page.currentPage} of {page.lastPage}</span>
 		{page.url.next &&
 			<a
 				class="page-hopper"

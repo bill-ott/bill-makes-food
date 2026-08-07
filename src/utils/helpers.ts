@@ -50,4 +50,4 @@ function createRecipeData(recipe: CollectionEntry<'recipes'>) {
 }
 
 
-export { sortPostsByDate, createEssayData, createRecipeData };
+export { formatRawDate, formatDate, sortPostsByDate, createEssayData, createRecipeData };
