@@ -1,52 +1,19 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import PostCard from '../components/PostCard.astro';
+import EssayCard from '../components/EssayCard.astro';
 import RecipeCard from '../components/RecipeCard.astro';
+import { sortPostsByDate, createEssayData, createRecipeData } from '../utils/helpers';
 import { getCollection } from 'astro:content';
 
-function formatRawDate(date: Date) {
-	return date.toISOString().split('T')[0];
-}
-
-function formatDate(date: Date) {
-	return date.toLocaleDateString('en-US', {
-		month: 'long',
-		day: 'numeric',
-		year: 'numeric',
-		timeZone: 'UTC',
-	});
-}
-
-const posts = await getCollection('blog');
-
-const sortedPreviewPosts = [...posts] // only first 3 will show
-	.sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
-	.slice(0, 3);
-
-const postData = sortedPreviewPosts.map((post) => ({
-	href: `/blog/${post.id}`,
-	title: post.data.title,
-	dateRaw: formatRawDate(post.data.publishDate),
-	publishDate: formatDate(post.data.publishDate),
-	summary: post.data.summary,
-}));
+const essays = await getCollection('blog'); // 'essay' used for specificity (vs. 'posts')
+const sortedEssays = sortPostsByDate(essays, 3); // only first 3 will show
+const essayData = sortedEssays.map(createEssayData);
 
 const recipes = await getCollection('recipes');
-
-const sortedPreviewRecipes = [...recipes] // only first 4 will show
-	.sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
-	.slice(0, 4);
-
-const recipeData = sortedPreviewRecipes.map((recipe, i) => ({
-	href: `/recipes/${recipe.id}`,
-	title: recipe.data.title,
-	dateRaw: formatRawDate(recipe.data.publishDate),
-	publishDate: formatDate(recipe.data.publishDate),
-	cookTime: recipe.data.cookTime,
-	summary: recipe.data.summary,
-	tags: recipe.data.tags,
-	heroImage: recipe.data.heroImage,
-	loading: i < 2 ? 'eager' as const : 'lazy' as const,
+const sortedRecipes = sortPostsByDate(recipes, 4); // only first 4 will show
+const recipeData = sortedRecipes.map((recipe, i) => ({
+	...createRecipeData(recipe),
+	loading: i < 2 ? ('eager' as const) : ('lazy' as const),
 }));
 ---
 
@@ -62,16 +29,28 @@ const recipeData = sortedPreviewRecipes.map((recipe, i) => ({
 	</section>
 	<div class="home-page-content-wrapper">
 		<section class="blog-section">
-			<h2 class="content-header">Latest posts</h2>
+			<h2 class="content-header">Latest blog posts</h2>
 			<div class="blog-grid">
-				{postData.map(post => <PostCard {...post} />)}
+				{essayData.map(essay => <EssayCard {...essay} />)}
 			</div>
+			<a
+				class="see-all-link"
+				href="/blog"
+			>
+				See all blog posts	
+			</a>
 		</section>
 		<section class="recipe-section">
 			<h2 class="content-header">Latest recipes</h2>
 			<div class="recipe-grid">
 				{recipeData.map(recipe => <RecipeCard {...recipe} />)}
 			</div>
+			<a
+				class="see-all-link"
+				href="/recipes"
+			>
+				See all recipes	
+			</a>
 		</section>
 	</div>
 </Layout>
@@ -113,10 +92,22 @@ const recipeData = sortedPreviewRecipes.map((recipe, i) => ({
 	.recipe-section {
 		margin-top: var(--space-md);
 	}
+	.blog-section, .recipe-section {
+		display: flex;
+		flex-direction: column;
+	}
 	.blog-grid {
 		display: grid;
 		grid-template-columns: 1fr;
 		gap: var(--space-sm);
+	}
+	.see-all-link {
+		margin: var(--space-sm) auto 0;
+		text-decoration: none;
+		color: var(--color-link);
+	}
+	.see-all-link:hover {
+		color: color-mix(in srgb, var(--color-link) 65%, transparent);
 	}
 	.recipe-grid {
 		display: grid;
