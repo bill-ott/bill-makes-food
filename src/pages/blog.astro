@@ -1,22 +1,12 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import PostCard from '../components/PostCard.astro';
-import { formatRawDate, formatDate } from '../utils/helpers';
+import { sortPostsByDate, createEssayData } from '../utils/helpers';
 import { getCollection } from 'astro:content';
 
-const posts = await getCollection('blog');
-
-const sortedPreviewPosts = [...posts] // only first 3 will show
-	.sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
-
-const postData = sortedPreviewPosts.map((post) => ({
-	href: `/blog/${post.id}`,
-	title: post.data.title,
-	dateRaw: formatRawDate(post.data.publishDate),
-	publishDate: formatDate(post.data.publishDate),
-	summary: post.data.summary,
-}));
-
+const essays = await getCollection('blog'); // 'essay' used for specificity (vs. 'posts')
+const sortedEssays = sortPostsByDate(essays);
+const essayData = sortedEssays.map(createEssayData);
 ---
 
 <Layout>
@@ -24,7 +14,7 @@ const postData = sortedPreviewPosts.map((post) => ({
 		<h1 class="site-title">Blog</h1>
 	</section>
 	<div class="blog-grid">
-		{postData.map(post => <PostCard {...post} />)}
+		{essayData.map(essay => <PostCard {...essay} />)}
 	</div>
 </Layout>
 
