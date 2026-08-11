@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import EssayCard from '../../components/EssayCard.astro';
+import PageNav from '../../components/PageNav.astro';
 import type { GetStaticPathsOptions } from 'astro';
 import { sortPostsByDate, createEssayData } from '../../utils/helpers';
 import { getCollection } from 'astro:content';
@@ -22,25 +23,7 @@ const essayData = page.data.map(createEssayData);
 	<div class="blog-grid">
 		{essayData.map(essay => <EssayCard {...essay} />)}
 	</div>
-	<nav
-		class="blog-page-nav"
-		aria-label="Blog pagination">
-		{page.url.prev &&
-			<a
-				class="page-hopper"
-				href={page.url.prev}>
-				← Prev
-			</a>
-		}
-		<span class="page-indicator">Page {page.currentPage} of {page.lastPage}</span>
-		{page.url.next &&
-			<a
-				class="page-hopper"
-				href={page.url.next}>
-				Next →
-			</a>
-		}
-	</nav>
+	<PageNav page={page}/>
 </Layout>
 
 <style>
@@ -55,19 +38,5 @@ const essayData = page.data.map(createEssayData);
 		display: grid;
 		grid-template-columns: 1fr;
 		gap: var(--space-sm);
-	}
-	.blog-page-nav {
-		display: flex;
-		justify-content: center;
-		margin-top: var(--space-md);
-		flex-wrap: wrap;
-	}
-	.page-hopper {
-		color: var(--color-link);
-		margin: 0 var(--space-xs);
-		text-decoration: none;
-	}
-	.page-hopper:hover {
-		color: color-mix(in srgb, var(--color-link) 65%, transparent);
 	}
 </style>

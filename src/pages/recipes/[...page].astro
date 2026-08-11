@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import RecipeCard from '../../components/RecipeCard.astro';
+import PageNav from '../../components/PageNav.astro';
 import type { GetStaticPathsOptions } from 'astro';
 import { sortPostsByDate, createRecipeData } from '../../utils/helpers';
 import { getCollection } from 'astro:content';
@@ -22,25 +23,7 @@ const essayData = page.data.map(createRecipeData);
 	<div class="recipe-grid">
 		{essayData.map(essay => <RecipeCard {...essay} />)}
 	</div>
-	<nav
-		class="recipe-page-nav"
-		aria-label="Recipe pagination">
-		{page.url.prev &&
-			<a
-				class="page-hopper"
-				href={page.url.prev}>
-				← Prev
-			</a>
-		}
-		<span class="page-indicator">Page {page.currentPage} of {page.lastPage}</span>
-		{page.url.next &&
-			<a
-				class="page-hopper"
-				href={page.url.next}>
-				Next →
-			</a>
-		}
-	</nav>
+	<PageNav page={page}/>
 </Layout>
 
 <style>
@@ -60,19 +43,5 @@ const essayData = page.data.map(createRecipeData);
 		.recipe-grid {
 			grid-template-columns: 1fr;
 		}
-	}
-	.recipe-page-nav {
-		display: flex;
-		justify-content: center;
-		margin-top: var(--space-md);
-		flex-wrap: wrap;
-	}
-	.page-hopper {
-		color: var(--color-link);
-		margin: 0 var(--space-xs);
-		text-decoration: none;
-	}
-	.page-hopper:hover {
-		color: color-mix(in srgb, var(--color-link) 65%, transparent);
 	}
 </style>
