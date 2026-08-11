@@ -1,0 +1,73 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import RecipeCard from '../../components/RecipeCard.astro';
+import type { GetStaticPathsOptions } from 'astro';
+import { sortPostsByDate, createRecipeData } from '../../utils/helpers';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
+	const essays = await getCollection('recipes');
+	const sortedEssays = sortPostsByDate(essays);
+	return paginate(sortedEssays, { pageSize: 10 });
+}
+
+const { page } = Astro.props;
+const essayData = page.data.map(createRecipeData);
+---
+
+<Layout>
+	<section class="header-section">
+		<h1 class="site-title">Recipes</h1>
+	</section>
+	<div class="recipe-grid">
+		{essayData.map(essay => <RecipeCard {...essay} />)}
+	</div>
+	<nav
+		class="recipe-page-nav"
+		aria-label="Recipe pagination">
+		{page.url.prev &&
+			<a
+				class="page-hopper"
+				href={page.url.prev}>
+				← Prev
+			</a>
+		}
+		<span class="page-indicator">Page {page.currentPage} of {page.lastPage}</span>
+		{page.url.next &&
+			<a
+				class="page-hopper"
+				href={page.url.next}>
+				Next →
+			</a>
+		}
+	</nav>
+</Layout>
+
+<style>
+	.header-section {
+		text-align: center;
+		color: var(--color-text-secondary);
+	}
+	.site-title {
+		font-size: var(--font-size-h2);
+	}
+	.recipe-grid {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: var(--space-sm);
+	}
+	.recipe-page-nav {
+		display: flex;
+		justify-content: center;
+		margin-top: var(--space-md);
+		flex-wrap: wrap;
+	}
+	.page-hopper {
+		color: var(--color-link);
+		margin: 0 var(--space-xs);
+		text-decoration: none;
+	}
+	.page-hopper:hover {
+		color: color-mix(in srgb, var(--color-link) 65%, transparent);
+	}
+</style>
