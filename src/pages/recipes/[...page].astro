@@ -1,27 +1,27 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import EssayCard from '../../components/EssayCard.astro';
+import RecipeCard from '../../components/RecipeCard.astro';
 import PageNav from '../../components/PageNav.astro';
 import type { GetStaticPathsOptions } from 'astro';
-import { sortPostsByDate, createEssayData } from '../../utils/helpers';
+import { sortPostsByDate, createRecipeData } from '../../utils/helpers';
 import { getCollection } from 'astro:content';
 
 export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
-	const essays = await getCollection('blog');
-	const sortedEssays = sortPostsByDate(essays);
-	return paginate(sortedEssays, { pageSize: 10 });
+	const recipes = await getCollection('recipes');
+	const sortedRecipes = sortPostsByDate(recipes);
+	return paginate(sortedRecipes, { pageSize: 10 });
 }
 
 const { page } = Astro.props;
-const essayData = page.data.map(createEssayData);
+const recipeData = page.data.map(createRecipeData);
 ---
 
 <Layout>
 	<section class="header-section">
-		<h1 class="site-title">Blog</h1>
+		<h1 class="site-title">Recipes</h1>
 	</section>
-	<div class="blog-grid">
-		{essayData.map(essay => <EssayCard {...essay} />)}
+	<div class="recipe-grid">
+		{recipeData.map(recipe => <RecipeCard {...recipe} />)}
 	</div>
 	<PageNav page={page}/>
 </Layout>
@@ -34,9 +34,14 @@ const essayData = page.data.map(createEssayData);
 	.site-title {
 		font-size: var(--font-size-h2);
 	}
-	.blog-grid {
+	.recipe-grid {
 		display: grid;
-		grid-template-columns: 1fr;
+		grid-template-columns: repeat(2, 1fr);
 		gap: var(--space-sm);
+	}
+	@media (max-width: 40rem) {
+		.recipe-grid {
+			grid-template-columns: 1fr;
+		}
 	}
 </style>
