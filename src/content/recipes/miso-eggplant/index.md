@@ -2,6 +2,36 @@
 title: Miso eggplant
 publishDate: 2026-07-23
 cookTime: 20
+ingredients: [
+    {
+        item: 'miso',
+        unit: 'g',
+        amount: 30,
+        group: 'sauce', 
+    },
+    {
+        item: 'soy sauce',
+        unit: 'ml',
+        amount: 15,
+        group: 'sauce', 
+    },
+    {
+        item: 'sugar',
+        unit: 'g',
+        amount: 20,
+        group: 'sauce', 
+    },
+    {
+        item: 'eggplant, cut into small wedges',
+        unit: 'g',
+        amount: 500, 
+    },
+    {
+        item: 'scallions, sliced',
+        unit: 'g',
+        amount: 100, 
+    },
+]
 summary: Caramelized miso elevates eggplant in a way I didn't really expect.
 tags: [vegetarian, Japanese, eggplant, side dish]
 heroImage: ./hero.png
