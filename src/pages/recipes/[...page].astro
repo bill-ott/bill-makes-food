@@ -7,13 +7,13 @@ import { sortPostsByDate, createRecipeData } from '../../utils/helpers';
 import { getCollection } from 'astro:content';
 
 export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
-	const essays = await getCollection('recipes');
-	const sortedEssays = sortPostsByDate(essays);
-	return paginate(sortedEssays, { pageSize: 10 });
+	const recipes = await getCollection('recipes');
+	const sortedRecipes = sortPostsByDate(recipes);
+	return paginate(sortedRecipes, { pageSize: 10 });
 }
 
 const { page } = Astro.props;
-const essayData = page.data.map(createRecipeData);
+const recipeData = page.data.map(createRecipeData);
 ---
 
 <Layout>
@@ -21,7 +21,7 @@ const essayData = page.data.map(createRecipeData);
 		<h1 class="site-title">Recipes</h1>
 	</section>
 	<div class="recipe-grid">
-		{essayData.map(essay => <RecipeCard {...essay} />)}
+		{recipeData.map(recipe => <RecipeCard {...recipe} />)}
 	</div>
 	<PageNav page={page}/>
 </Layout>
