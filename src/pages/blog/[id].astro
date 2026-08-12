@@ -1,6 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { getCollection, render } from 'astro:content';
+import { getCollection, getEntries, render } from 'astro:content';
 import { formatDate, formatRawDate } from '../../utils/helpers';
 
 export async function getStaticPaths() {
@@ -13,6 +13,7 @@ export async function getStaticPaths() {
 
 const { essay } = Astro.props;
 const { Content } = await render(essay);
+const relatedRecipes = (await getEntries(essay.data.relatedRecipes ?? [])).filter((recipe) => recipe !== undefined);
 ---
 
 <Layout>
@@ -24,6 +25,17 @@ const { Content } = await render(essay);
 			{formatDate(essay.data.publishDate)}
 		</time>
 		<Content />
+        {
+            relatedRecipes.length > 0 &&
+                <div class="related-recipes">
+                    Related recipes: {relatedRecipes.map((recipe, i) => (
+                        <>
+                            <a class="related-recipe-link" href={`/recipes/${recipe.id}`}>{recipe.data.title}</a>
+                            {i < relatedRecipes.length - 1 && ', '}
+                        </>
+                    ))}
+                </div>
+        }
 	</article>
 </Layout>
 
@@ -47,5 +59,13 @@ const { Content } = await render(essay);
         margin-inline: auto;
         max-width: 100%;
         height: auto;
+    }
+    .related-recipes {
+        margin-top: var(--space-sm);
+        font-weight: 500;
+    }
+    .related-recipe-link {
+        text-decoration: none;
+        color: var(--color-link);
     }
 </style>
