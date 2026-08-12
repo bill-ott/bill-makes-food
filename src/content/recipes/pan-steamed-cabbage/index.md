@@ -19,6 +19,7 @@ ingredients: [
 summary: This simple dish is less a recipe and more of a technique.
 tags: [vegetarian, side dish, cabbage]
 heroImage: ./hero.png
+altText: a bowl of steamed cabbage with flecks of black pepper
 ---
 
 This is the body. Everything below the closing fence is Markdown that becomes the rendered page.

@@ -1,5 +1,7 @@
 import type { CollectionEntry } from 'astro:content';
 
+type Ingredient = CollectionEntry<'recipes'>['data']['ingredients'][number];
+
 function formatRawDate(date: Date) {
 	return date.toISOString().split('T')[0];
 }
@@ -49,5 +51,18 @@ function createRecipeData(recipe: CollectionEntry<'recipes'>) {
 	};
 }
 
+function groupIngredients(ingredients: Ingredient[]) {
+    const groups: { label: string | undefined; items: Ingredient[] }[] = [];
+    ingredients.forEach((ingredient) => {
+        const lastGroup = groups.at(-1);
+        if (lastGroup && lastGroup.label === ingredient.group) {
+            lastGroup.items.push(ingredient);
+        } else {
+            groups.push({ label: ingredient.group, items: [ingredient] });
+        }
+    });
+    const rank = (group: { label: string | undefined }) => (group.label === undefined ? 0 : 1);
+    return [...groups].sort((a, b) => rank(a) - rank(b));
+}
 
-export { formatRawDate, formatDate, sortPostsByDate, createEssayData, createRecipeData };
+export { formatRawDate, formatDate, sortPostsByDate, createEssayData, createRecipeData, groupIngredients };

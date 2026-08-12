@@ -28,6 +28,7 @@ const recipes = defineCollection({
     summary: z.string(),
     tags: z.array(z.string()),
     heroImage: image(),
+    altText: z.string(),
   }),
 });
 

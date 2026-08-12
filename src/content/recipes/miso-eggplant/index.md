@@ -36,6 +36,7 @@ ingredients: [
 summary: Caramelized miso elevates eggplant in a way I didn't really expect.
 tags: [vegetarian, Japanese, eggplant, side dish]
 heroImage: ./hero.png
+altText: a bowl of glossy braised eggplant topped with sliced scallions
 ---
 
 This is the body. Everything below the closing fence is Markdown that becomes the rendered page.

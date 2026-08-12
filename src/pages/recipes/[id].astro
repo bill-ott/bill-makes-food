@@ -2,7 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import { Image } from 'astro:assets';
 import { getCollection, render } from 'astro:content';
-import { formatDate, formatRawDate } from '../../utils/helpers';
+import { formatDate, formatRawDate, groupIngredients } from '../../utils/helpers';
 
 export async function getStaticPaths() {
 	const recipes = await getCollection('recipes');
@@ -31,27 +31,32 @@ const { Content } = await render(recipe);
             <span class="serving">Serves {recipe.data.servings}</span>
         </div>
         <div class="secondary-data-wrapper">
-            <div class="ingredient-list-wrapper">
+            <Image
+                src={recipe.data.heroImage}
+                alt={recipe.data.altText}
+                loading="eager"
+                class="card-image" />
+            <div class="ingredient-wrapper">
                 <h2 class="ingredient-header">
                     Ingredients
                 </h2>
-                <ul class="ingredients-list">
-                    {
-                        recipe.data.ingredients.map((ingredient) => (
-                            <li class="ingredient">
-                                <span class="ingredient-name">{ingredient.item}</span>
-                                {ingredient.amount != null && <span class="ingredient-amount"> {ingredient.amount}</span>}
-                                {ingredient.unit && <span class="ingredient-unit">{ingredient.unit}</span>}
-                            </li>
-                        ))
-                    }
-                </ul>
+                <div class="ingredient-list-wrapper">
+                    {groupIngredients(recipe.data.ingredients).map((group) => (
+                        <>
+                            {group.label && <h3 class="ingredient-group-label">{group.label}</h3>}
+                            <ul class:list={['ingredients-list', group.label && 'ingredients-list--indented']}>
+                                {group.items.map((ingredient) => (
+                                    <li class="ingredient">
+                                        <span class="ingredient-name">{ingredient.item}</span>
+                                        {ingredient.amount != null && <span class="ingredient-amount"> {ingredient.amount}</span>}
+                                        {ingredient.unit && <span class="ingredient-unit">{ingredient.unit}</span>}
+                                    </li>
+                                ))}
+                            </ul>
+                        </>
+                    ))}
+                </div>
             </div>
-            <Image
-                src={recipe.data.heroImage}
-                alt={recipe.data.title}
-                loading="eager"
-                class="card-image" />
         </div>
         <div class="content-section">
             <Content />
@@ -74,6 +79,7 @@ const { Content } = await render(recipe);
         font-size: var(--font-size-md);
         margin: var(--space-sm) 0 var(--space-xs);
         display: flex;
+        flex-wrap: wrap;
     }
     .base-data-divider {
         padding: 0 var(--space-xs);
@@ -81,19 +87,41 @@ const { Content } = await render(recipe);
     .secondary-data-wrapper {
         margin-top: var(--space-sm);
         display: flex;
-        gap: var(--space-xl);
-    }
-    .ingredient-header {
-        margin: 0;
-        font-size: var(--font-size-h6);
+        flex-direction: column;
     }
     .card-image {
-        width:  25rem;
-        height: 25rem;
+        width: 100%;
+        max-width: 25rem;
+        height: auto;
         display: block;
-        transition: transform 0.2s ease;
+    }
+    .ingredient-header {
+        margin: var(--space-md) 0 0;
+        font-size: var(--font-size-h6);
+    }
+    .ingredient-group-label {
+        margin: var(--space-xs) 0 0;
+        font-size: var(--font-size-p);
+        color: var(--color-text-tertiary);
+        text-transform: uppercase;
+    }
+    .ingredient-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-sm);
+    }
+    .ingredient-list-wrapper {
+        padding-left: var(--space-sm);
+    }
+    .ingredients-list {
+        list-style-position: inside;
+        padding-left: 0;
+        margin: 0;
+    }
+    .ingredients-list--indented {
+        padding-left: var(--space-md);
     }
     .content-section {
-        margin-top: var(--space-md);
+        margin-top: var(--space-sm);
     }
 </style>
