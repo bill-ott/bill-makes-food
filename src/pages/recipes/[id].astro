@@ -1,7 +1,8 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import { Image } from 'astro:assets';
 import { getCollection, render } from 'astro:content';
-import { formatDate, formatRawDate } from '../../utils/helpers';
+import { formatDate, formatRawDate, groupIngredients } from '../../utils/helpers';
 
 export async function getStaticPaths() {
 	const recipes = await getCollection('recipes');
@@ -18,12 +19,51 @@ const { Content } = await render(recipe);
 <Layout>
 	<article class="post-content">
 		<h1 class="post-title-header">{recipe.data.title}</h1>
-		<time
-            class="post-publish-date"
-            datetime={formatRawDate(recipe.data.publishDate)}>
-			{formatDate(recipe.data.publishDate)}
-		</time>
-		<Content />
+        <div class="tag-wrapper">
+            {recipe.data.tags.map(tag => <span class="tag">{tag}</span>)}
+        </div>
+        <div class="base-data-wrapper">
+            <time
+                class="post-publish-date"
+                datetime={formatRawDate(recipe.data.publishDate)}>
+                {formatDate(recipe.data.publishDate)}
+            </time>
+            <span class="base-data-divider">•</span>
+            <span class="cook-time">{recipe.data.cookTime} mins</span>
+            <span class="base-data-divider">•</span>
+            <span class="serving">Serves {recipe.data.servings}</span>
+        </div>
+        <div class="secondary-data-wrapper">
+            <Image
+                src={recipe.data.heroImage}
+                alt={recipe.data.altText}
+                loading="eager"
+                class="card-image" />
+            <div class="ingredient-wrapper">
+                <h2 class="ingredient-header">
+                    Ingredients
+                </h2>
+                <div class="ingredient-list-wrapper">
+                    {groupIngredients(recipe.data.ingredients).map((group) => (
+                        <>
+                            {group.label && <h3 class="ingredient-group-label">{group.label}</h3>}
+                            <ul class:list={['ingredients-list', group.label && 'ingredients-list--indented']}>
+                                {group.items.map((ingredient) => (
+                                    <li class="ingredient">
+                                        <span class="ingredient-name">{ingredient.item}</span>
+                                        {ingredient.amount != null && <span class="ingredient-amount"> {ingredient.amount}</span>}
+                                        {ingredient.unit && <span class="ingredient-unit">{ingredient.unit}</span>}
+                                    </li>
+                                ))}
+                            </ul>
+                        </>
+                    ))}
+                </div>
+            </div>
+        </div>
+        <div class="content-section">
+            <Content />
+        </div>
 	</article>
 </Layout>
 
@@ -35,17 +75,72 @@ const { Content } = await render(recipe);
     }
     .post-title-header {
         font-size: var(--font-size-h4);
+        margin: 0;
     }
-    .post-publish-date {
-        display: inline-block;
+    .tag-wrapper {
+        display: flex;
+        gap: var(--space-xs);
+        margin-top: var(--space-sm);
+        flex-wrap: wrap;
+    }
+    .tag {
+        font-size: var(--font-size-sm);
+        color: var(--color-text-tertiary);
+        font-weight: 500;
+        background-color: var(--color-surface);
+        padding: var(--space-xs) var(--space-sm);
+        border-radius: var(--radius-pill);
+        margin: 0;
+        white-space: nowrap;
+    }
+    .base-data-wrapper {
         color: var(--color-text-tertiary);
         font-size: var(--font-size-md);
-        margin: var(--space-xs) 0;
+        margin: var(--space-sm) 0 var(--space-xs);
+        display: flex;
+        flex-wrap: wrap;
     }
-    :global(.post-content img) {
-        display: block;
-        margin-inline: auto;
-        max-width: 100%;
+    .base-data-divider {
+        padding: 0 var(--space-xs);
+    }
+    .secondary-data-wrapper {
+        margin-top: var(--space-sm);
+        display: flex;
+        flex-direction: column;
+    }
+    .card-image {
+        width: 100%;
+        max-width: 25rem;
         height: auto;
+        display: block;
+    }
+    .ingredient-header {
+        margin: var(--space-md) 0 0;
+        font-size: var(--font-size-h6);
+    }
+    .ingredient-group-label {
+        margin: var(--space-xs) 0 0;
+        font-size: var(--font-size-p);
+        color: var(--color-text-tertiary);
+        text-transform: uppercase;
+    }
+    .ingredient-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-sm);
+    }
+    .ingredient-list-wrapper {
+        padding-left: var(--space-sm);
+    }
+    .ingredients-list {
+        list-style-position: inside;
+        padding-left: 0;
+        margin: 0;
+    }
+    .ingredients-list--indented {
+        padding-left: var(--space-md);
+    }
+    .content-section {
+        margin-top: var(--space-sm);
     }
 </style>
