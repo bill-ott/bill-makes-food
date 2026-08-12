@@ -18,8 +18,8 @@ const { href, title, dateRaw, publishDate, cookTime, summary, tags, heroImage, l
 
 
 ---
-<article class="card-preview">
-    <header class="post-title-header">
+<div class="card-preview">
+    <div class="post-title-header">
         <h3 class="post-title">
             <a class="title-link" href={href}>{title}</a>
         </h3>
@@ -30,7 +30,7 @@ const { href, title, dateRaw, publishDate, cookTime, summary, tags, heroImage, l
             <span class="date-divider">•</span>
             <span class="cook-time">{cookTime} mins</span>
         </div>
-    </header>
+    </div>
     <div class="card-image-wrapper">
         <Image
             src={heroImage}
@@ -43,7 +43,7 @@ const { href, title, dateRaw, publishDate, cookTime, summary, tags, heroImage, l
         {tags.map(tag => <span class="tag">{tag}</span>)}
     </div>
     <p class="full-recipe-text">Read the full recipe →</p>
-</article>
+</div>
 
 <style>
 	.card-preview {
@@ -72,6 +72,7 @@ const { href, title, dateRaw, publishDate, cookTime, summary, tags, heroImage, l
         content: "";
         position: absolute;
         inset: 0;
+        z-index: 1;
     }
     .date-wrapper {
         color: var(--color-text-tertiary);
