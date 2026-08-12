@@ -19,26 +19,28 @@ const { Content } = await render(recipe);
 <Layout>
 	<article class="post-content">
 		<h1 class="post-title-header">{recipe.data.title}</h1>
-        <div class="date-wrapper">
+        <div class="base-data-wrapper">
             <time
                 class="post-publish-date"
                 datetime={formatRawDate(recipe.data.publishDate)}>
                 {formatDate(recipe.data.publishDate)}
             </time>
-            <span class="date-divider">•</span>
+            <span class="base-data-divider">•</span>
             <span class="cook-time">{recipe.data.cookTime} mins</span>
+            <span class="base-data-divider">•</span>
+            <span class="serving">Serves {recipe.data.servings}</span>
         </div>
-        <div class="meta-data-wrapper">
+        <div class="secondary-data-wrapper">
             <div class="ingredient-list-wrapper">
-                <div class="ingredient-header">
+                <h2 class="ingredient-header">
                     Ingredients
-                </div>
+                </h2>
                 <ul class="ingredients-list">
                     {
                         recipe.data.ingredients.map((ingredient) => (
                             <li class="ingredient">
                                 <span class="ingredient-name">{ingredient.item}</span>
-                                {ingredient.amount && <span class="ingredient-amount"> {ingredient.amount}</span>}
+                                {ingredient.amount != null && <span class="ingredient-amount"> {ingredient.amount}</span>}
                                 {ingredient.unit && <span class="ingredient-unit">{ingredient.unit}</span>}
                             </li>
                         ))
@@ -67,20 +69,23 @@ const { Content } = await render(recipe);
         font-size: var(--font-size-h4);
         margin: 0;
     }
-    .date-wrapper {
+    .base-data-wrapper {
         color: var(--color-text-tertiary);
         font-size: var(--font-size-md);
         margin: var(--space-sm) 0 var(--space-xs);
         display: flex;
     }
-    .date-divider {
+    .base-data-divider {
         padding: 0 var(--space-xs);
     }
-    .meta-data-wrapper {
+    .secondary-data-wrapper {
         margin-top: var(--space-sm);
         display: flex;
-        color: var(--color-text-tertiary);
         gap: var(--space-xl);
+    }
+    .ingredient-header {
+        margin: 0;
+        font-size: var(--font-size-h6);
     }
     .card-image {
         width:  25rem;
@@ -89,6 +94,6 @@ const { Content } = await render(recipe);
         transition: transform 0.2s ease;
     }
     .content-section {
-        margin-top: var(--space-);
+        margin-top: var(--space-md);
     }
 </style>

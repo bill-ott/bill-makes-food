@@ -2,6 +2,7 @@
 title: Miso eggplant
 publishDate: 2026-07-23
 cookTime: 20
+servings: 2
 ingredients: [
     {
         item: 'miso',

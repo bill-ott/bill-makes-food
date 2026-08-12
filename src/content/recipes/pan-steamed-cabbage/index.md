@@ -2,6 +2,7 @@
 title: Pan steamed cabbage
 publishDate: 2026-07-20
 cookTime: 10
+servings: 2
 ingredients: [
     {
         item: 'cabbage',
