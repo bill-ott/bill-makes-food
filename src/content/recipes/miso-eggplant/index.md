@@ -22,12 +22,12 @@ ingredients: [
         group: 'sauce', 
     },
     {
-        item: 'eggplant, cut into small wedges',
+        item: 'eggplant, cut into small wedges, about',
         unit: 'g',
-        amount: 500, 
+        amount: 500,
     },
     {
-        item: 'scallions, sliced',
+        item: 'scallions, sliced, about',
         unit: 'g',
         amount: 100, 
     },
