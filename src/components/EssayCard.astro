@@ -10,7 +10,7 @@ type Props = {
 const { href, title, dateRaw, publishDate, summary } = Astro.props;
 
 ---
-<article class="card-preview">
+<div class="card-preview">
     <div class="post-title-header">
         <h3 class="post-title">
             <a class="title-link" href={href}>{title}</a>
@@ -22,7 +22,7 @@ const { href, title, dateRaw, publishDate, summary } = Astro.props;
     <p class="post-preview-text">{summary}</p>
     <!-- "read more" text looks like a link, but redirect is handled by after on title -->
     <p class="full-post-text">Read more →</p>
-</article>
+</div>
 
 <style>
 	.card-preview {
