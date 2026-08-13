@@ -3,20 +3,32 @@ import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout>
-	<section class="header-section">
-		<h1 class="site-title">About</h1>
-		<p class="intro">
-			This is where the about stuff will live.
+	<section class="about-section">
+		<h1 class="page-title">About</h1>
+		<p>
+			Hi, I'm Bill and I like to make food. I cook about 95% of my meals at home.
+		</p>
+		<p>
+			Over the years, I've gradually developed a lifestyle I call "cooking by default". This is a sort of habitual, systematic approach to home cooking.
+			I've thought through and streamlined the cooking process end to end in a way that makes it approachable, balanced, and enjoyable.
+		</p>
+		<p>
+			This blog is where I write about what actually moves the needle. Techniques, economics of the kitchen, how to navigate gaps, ingredients I like.
+			And a few recipes here and there as well. 
+		</p>
+		<p>
+			Maybe you'll find it helpful, even if you don't (yet) love to cook.
 		</p>
 	</section>
 </Layout>
 
 <style>
-	.header-section {
-		text-align: center;
+	.about-section {
 		color: var(--color-text-secondary);
+		padding: 0 var(--space-xl);
 	}
-	.site-title {
+	.page-title {
+		text-align: center;
 		font-size: var(--font-size-h2);
 	}
 </style>
