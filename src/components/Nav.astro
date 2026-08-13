@@ -1,6 +1,7 @@
 ---
 import NavMenuIcon from "../components/icons/NavMenuIcon.astro";
 import NavCloseIcon from "../components/icons/NavCloseIcon.astro";
+import logo from '../assets/home-logo.png';
 const pathname = Astro.url.pathname;
 const navLinks = [
 	{href: '/blog', label: 'Blog'},
@@ -10,11 +11,11 @@ const navLinks = [
 ];
 ---
 <div class="home-link-container">
-    <!-- logo will go here -->
     <a
         class="home-link"
         href="/"
         aria-current={pathname === "/" ? "page" : undefined}>
+        <img src={logo.src} class="home-logo" />
         Bill Makes Food
     </a>
 </div>
@@ -80,9 +81,15 @@ const navLinks = [
         position: relative;
         z-index: 1000;
     }
+    .home-logo {
+        image-rendering: pixelated;
+    }
     .home-link {
 		color: var(--color-text-secondary);
 		text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: var(--space-xxs);
 	}
 	.home-link:hover {
 		color: color-mix(in srgb, var(--color-text-secondary) 65%, transparent);
