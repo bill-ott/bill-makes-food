@@ -65,4 +65,11 @@ function groupIngredients(ingredients: Ingredient[]) {
     return [...groups].sort((a, b) => rank(a) - rank(b));
 }
 
-export { formatRawDate, formatDate, sortPostsByDate, createEssayData, createRecipeData, groupIngredients };
+export { 
+	formatRawDate,
+	formatDate,
+	sortPostsByDate,
+	createEssayData,
+	createRecipeData,
+	groupIngredients
+};
