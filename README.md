@@ -7,14 +7,16 @@ A personal blog for sharing a habit-first, mental model centric, systemic approa
 ## Background
 
 I make cooking content as a hobby and I'm a front-end engineer by trade. This project marries two things I love: cooking and coding.
-I not only wanted an outlet for my writing, I wanted to demonstrate my take on a clean, organized, and slick website.
+I not only wanted an outlet for my writing, but I also wanted to demonstrate my take on a clean, organized, and slick website.
 
 ## Tech stack
 
 - **[Astro](https://astro.build)**
-- Plain HTML/CSS/JavaScript
+- **TypeScript**
+- **Zod** — schema validation for content collections
+- Astro content collections with cross-collection references
 - Self-hosted Montserrat via Astro's Fonts API
-- Design tokens: CSS variables simplify styling allowing for seamless incorporation of color palette, type scaling, and consistent spacing.
+- Design tokens: CSS custom properties for color palette, type scale, and spacing
 
 ## Why I built it this way
 
@@ -29,13 +31,7 @@ npm run dev      # local dev server
 npm run build    # production build to dist/
 ```
 
-## Project structure
+## Roadmap
 
-tbd
-
-## Roadmap / status
-
- - deployment
- - mobile navigation enhancements
- - content collections for recipes and blog posts
- - recipe tags and inter-site linking
+ - tag filtering for recipes
+ - searchability for recipes
