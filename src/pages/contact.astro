@@ -1,12 +1,27 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import profilePic from '../assets/profile-pic.jpg';
 ---
 
 <Layout>
 	<section class="header-section">
-		<h1 class="site-title">Contact</h1>
-		<p class="intro">
-			This is where you'll be able to contact me will live.
+		<h1 class="page-title">Contact</h1>
+		<p>
+			I'm on YouTube - come say hi!
+		</p>
+		<a
+			href="https://www.youtube.com/@billmakesfood"
+			target="_blank"
+			rel="noopener noreferrer">
+			<Image
+				src={profilePic}
+				alt="Bill's YouTube channel"
+				loading="eager"
+				class="profile-pic" />
+		</a>
+		<p class="handle-name">
+			@billmakesfood
 		</p>
 	</section>
 </Layout>
@@ -16,7 +31,23 @@ import Layout from '../layouts/Layout.astro';
 		text-align: center;
 		color: var(--color-text-secondary);
 	}
-	.site-title {
+	.page-title {
 		font-size: var(--font-size-h2);
+	}
+	.profile-pic {
+		margin-top: var(--space-md);
+		max-width: 20rem;
+		max-height: 20rem;
+		width: 100%;
+		height: auto;
+		border-radius: 50%;
+		transition: transform 0.2s ease;
+	}
+	.profile-pic:hover {
+        transform: scale(1.03);
+    }
+	.handle-name {
+		font-weight: 500;
+		font-size: var(--font-size-h5)
 	}
 </style>

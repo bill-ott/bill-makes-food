@@ -114,6 +114,11 @@ import Nav from "../components/Nav.astro";
 		min-height: 100vh;
 		padding: var(--space-md);
 	}
+	@media (max-width: 40rem) {
+		body {
+			padding: var(--space-sm);
+		}
+	}
 	.content-column {
 		width: 100%;
 		max-width: var(--max-content-width);
