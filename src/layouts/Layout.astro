@@ -1,6 +1,7 @@
 ---
 import { Font } from "astro:assets";
 import Nav from "../components/Nav.astro";
+import FooterNav from "../components/FooterNav.astro";
 ---
 
 <!doctype html>
@@ -23,11 +24,9 @@ import Nav from "../components/Nav.astro";
 		</div>
 		<footer>
 			<div class="footer-wrapper content-column">
+				<FooterNav />
 				<p class="copyright">
 					© {new Date().getFullYear()} Bill Makes Food. All rights reserved.
-				</p>
-				<p class="additional-footer-content">
-					Additional things I want to say in the footer go here.
 				</p>
 			</div>
 		</footer>
@@ -137,10 +136,13 @@ import Nav from "../components/Nav.astro";
 	.footer-wrapper {
 		font-size: var(--font-size-sm);
 		color: var(--color-text-secondary);
-		margin-top: var(--space-md);
+		margin-top: var(--space-lg);
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 	}
 	.copyright {
-		margin: 0;
+		margin: var(--space-xs) 0 0;
 	}
 	.additional-footer-content {
 		margin: 0;

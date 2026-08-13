@@ -1,0 +1,50 @@
+---
+const pathname = Astro.url.pathname;
+const navLinks = [
+    {href: '/', label: 'Home'},
+	{href: '/blog', label: 'Blog'},
+	{href: '/recipes', label: 'Recipes'},
+	{href: '/about', label: 'About'},
+	{href: '/contact', label: 'Contact'},
+];
+---
+
+<nav class="footer-nav">
+    <ul class="nav-list" id="nav-list">
+        {navLinks.map(link => (
+            <li class="nav-list-item">
+                <a
+                    class="nav-link"
+                    href={link.href}
+                    aria-current={pathname === link.href ? "page" : undefined}>
+                    {link.label}
+                </a>
+            </li>
+        ))}
+    </ul>
+</nav>
+
+<style>
+    .nav-list {
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+        display: flex;
+        gap: var(--space-md);
+    }
+    @media (max-width: 40rem) {
+        .nav-list {
+            gap: var(--space-sm);
+        }
+    }
+    .nav-link {
+		color: var(--color-link);
+		text-decoration: none;
+	}
+	.nav-link:hover {
+		color: color-mix(in srgb, var(--color-link) 65%, transparent);
+	}
+    .nav-menu-button {
+        display: none;
+    }
+</style>
